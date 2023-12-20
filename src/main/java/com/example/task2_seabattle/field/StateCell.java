@@ -1,4 +1,12 @@
 package com.example.task2_seabattle.field;
 
-public enum StateCell git {
+public enum StateCell {
+    EMPTY,
+    WATER,
+    BORDER,
+    HEALTHY,
+    SHOT,
+    KILLED,
+    MISSED
 }
+
