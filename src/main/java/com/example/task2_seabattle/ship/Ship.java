@@ -14,8 +14,22 @@ public class Ship {
     //направление, dy - по вертикали, dx - горизонталь
     private int dx, dy;
     private int healthPoints;
+
+    public void setHealthPoints(int healthPoints) {
+        this.healthPoints = healthPoints;
+    }
+
+    public int getHealthPoints() {
+        return healthPoints;
+    }
+
     private int sizeShip;
     private ShipState shipHealthState;
+
+    public void setShipHealthState(ShipState shipHealthState) {
+        this.shipHealthState = shipHealthState;
+    }
+
     private Field field;
     private ArrayList<Cell> cells;
 
@@ -103,7 +117,7 @@ public class Ship {
                 return false;
             }
         }
-        // площадка сверху и снизу корабля
+        // площадка сверху и снизу корабля относительно самого корабля
         for (i = 0; i < sizeShip; i++) {
             m = y + i * dy - dx;
             n = x + i * dx - dy;
@@ -116,7 +130,7 @@ public class Ship {
                 return false;
             }
         }
-        // площадка слева и справа корабля
+        // площадка слева и справа корабля относительно самого корабля
         for (i = -1; i < 2; i++) {
             m = y + i * dx - dy;
             n = x + i * dy - dx;

@@ -1,5 +1,6 @@
 package com.example.task2_seabattle;
 
+import com.example.task2_seabattle.field.Field;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -16,8 +17,17 @@ public class HelloApplication extends Application {
         stage.setScene(scene);
         stage.show();
     }
-
+    static Field field = new Field();
     public static void main(String[] args) {
-        launch();
+//        launch();
+
+        field.Draw();
+        for (int i = 0; i < 10; i+= 2){
+            for (int j = 0; j < 10; j += 2){
+                field.doShot(i, j);
+            }
+        }
+        System.out.println();
+        field.Draw();
     }
 }
