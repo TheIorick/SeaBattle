@@ -107,12 +107,12 @@ public class Ship {
         for (i = 0; i < sizeShip; i++) {
             m = y + i * dy - dx;
             n = x + i * dx - dy;
-            if (!ts.Border(m, n)) {
+            if (!ts.border(m, n)) {
                 return false;
             }
             m = y + i * dy + dx;
             n = x + i * dx + dy;
-            if (!ts.Border(m, n)) {
+            if (!ts.border(m, n)) {
                 return false;
             }
         }
@@ -120,12 +120,12 @@ public class Ship {
         for (i = -1; i < 2; i++) {
             m = y + i * dx - dy;
             n = x + i * dy - dx;
-            if (!ts.Border(m, n)) {
+            if (!ts.border(m, n)) {
                 return false;
             }
             m = y + i * dx + dy * sizeShip;
             n = x + i * dy + dx * sizeShip;
-            if (!ts.Border(m, n)) {
+            if (!ts.border(m, n)) {
                 return false;
             }
         }

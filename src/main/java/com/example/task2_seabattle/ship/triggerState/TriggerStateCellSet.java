@@ -12,15 +12,15 @@ public class TriggerStateCellSet extends TriggerStateCell{
 
     @Override
     public boolean Ship(int n, int m) {
-        field.setCellState(n, m, StateCell.HEALTHY);
-        ship.getCells().add(field.elements[n][m]);
-        field.cells[n][m].ship = ship;
+        field.setStateCell(n, m, StateCell.HEALTHY);
+        ship.getCells().add(field.cells[n][m]);
+        field.cells[n][m].elementInCell = ship;
         return true;
     }
 
     @Override
-    public boolean Border(int n, int m) {
-        field.setCellState(n, m, StateCell.BORDER);
+    public boolean border(int n, int m) {
+        field.setStateCell(n, m, StateCell.BORDER);
         return true;
     }
 }

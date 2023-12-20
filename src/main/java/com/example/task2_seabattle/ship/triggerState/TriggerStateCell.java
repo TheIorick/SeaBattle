@@ -12,5 +12,5 @@ public abstract class TriggerStateCell {
     }
 
     abstract public boolean Ship(int n, int m);
-    abstract public boolean Border(int n, int m);
+    abstract public boolean border(int n, int m);
 }

@@ -10,13 +10,13 @@ public class TriggerStateCellCheck extends TriggerStateCell {
     }
     @Override
     public boolean Ship(int n, int m) {
-        StateCell stateCell = field.GetCell(n, m);
+        StateCell stateCell = field.getStateCell(n, m);
         return (stateCell == StateCell.WATER);
     }
 
     @Override
-    public boolean Border(int n, int m) {
-        StateCell stateCell = field.GetCell(n, m);
+    public boolean border(int n, int m) {
+        StateCell stateCell = field.getStateCell(n, m);
         return (stateCell == StateCell.BORDER) || (stateCell == StateCell.WATER) || (stateCell == StateCell.EMPTY);
     }
 }

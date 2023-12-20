@@ -5,7 +5,7 @@ import com.example.task2_seabattle.ship.Ship;
 public class Cell {
 
     public StateCell stateCell;
-    public Ship ElementInCell;
+    public Ship elementInCell;
     public boolean shot;
     public int x, y;
 
