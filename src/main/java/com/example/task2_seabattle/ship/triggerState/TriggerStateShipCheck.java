@@ -4,8 +4,8 @@ import com.example.task2_seabattle.field.StateCell;
 import com.example.task2_seabattle.ship.Ship;
 
 
-public class TriggerStateCellCheck extends TriggerStateCell {
-    public TriggerStateCellCheck(Ship ship) {
+public class TriggerStateShipCheck extends TriggerStateShip {
+    public TriggerStateShipCheck(Ship ship) {
         super(ship);
     }
     @Override

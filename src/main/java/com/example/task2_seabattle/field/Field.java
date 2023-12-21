@@ -35,14 +35,6 @@ public class Field {
                 ships.add(ship);
             }
         }
-        for(int i = 0; i < SIZE_FIELD; i++){
-            for (int j = 0; j < SIZE_FIELD; j++){
-                Cell cell = cells[i][j];
-                if (cell.stateCell == StateCell.BORDER){
-                    cell.stateCell = StateCell.WATER;
-                }
-            }
-        }
 
     }
     //todo: сделать c учетом изменяемого поля
@@ -63,14 +55,13 @@ public class Field {
     /**
      * Установить тип элемента по координатам
      */
-    public boolean setStateCell(int x, int y, StateCell stateCell){
+    public void setStateCell(int x, int y, StateCell stateCell){
         if (isBound(x, y)){
             cells[x][y].stateCell = stateCell;
         }
-        return true;
     }
 
-    public boolean doShot(int x, int y){
+    public void doShot(int x, int y){
         boolean shot = false;
         StateCell stateCell = this.getStateCell(x, y);
         cells[x][y].shot = true;
@@ -82,22 +73,41 @@ public class Field {
                 ship.setHealthPoints(ship.getHealthPoints() - 1);
                 if (ship.getHealthPoints() == 0){
                     ship.setShipHealthState(ShipState.KILLED);
-                    for (Cell cell : ship.getCells()){
+                    for (Cell cell : ship.getCellsShip()){
                         cell.stateCell = StateCell.KILLED;
+                    }
+                    for (Cell cell : ship.getCellsBorder()){
+                        cell.stateCell = StateCell.MISSED;
                     }
                 } else {
                     ship.setShipHealthState(ShipState.SHOT);
                     cells[x][y].stateCell = StateCell.SHOT;
                 }
             }
+        //Если промах
         } else {
             if((stateCell == StateCell.BORDER) || (stateCell == StateCell.WATER)){
                 this.setStateCell(x, y, StateCell.MISSED);
             }
         }
-        return shot;
     }
-    public void Draw() {
+    //Переименование границ потопленного корабля
+//    public boolean checkBorderCell(Ship ship){
+//        int n, m, i;
+//        for (i = -1; i < 2; i++) {
+//            m = y + i * dx - dy;
+//            n = x + i * dy - dx;
+//            if (stateCell == StateCell.BORDER) {
+//                return false;
+//            }
+//            m = y + i * dx + dy;
+//            n = x + i * dy + dx;
+//            if (!ts.border(m, n)) {
+//                return false;
+//            }
+//        }
+//    }
+    public void draw() {
         for(int j=0; j<10; j++) {
             for(int i=0; i<10; i++) {
                 System.out.print(cells[i][j].stateCell.toString() + " ");

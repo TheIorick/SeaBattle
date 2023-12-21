@@ -2,17 +2,26 @@ package com.example.task2_seabattle.ship;
 
 import com.example.task2_seabattle.field.Cell;
 import com.example.task2_seabattle.field.Field;
-import com.example.task2_seabattle.ship.triggerState.TriggerStateCell;
-import com.example.task2_seabattle.ship.triggerState.TriggerStateCellCheck;
-import com.example.task2_seabattle.ship.triggerState.TriggerStateCellSet;
+import com.example.task2_seabattle.ship.triggerState.TriggerStateShip;
+import com.example.task2_seabattle.ship.triggerState.TriggerStateShipCheck;
+import com.example.task2_seabattle.ship.triggerState.TriggerStateShipSet;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class Ship {
     private int x, y;
+
     //направление, dy - по вертикали, dx - горизонталь
     private int dx, dy;
+    public int getDx() {
+        return dx;
+    }
+
+    public int getDy() {
+        return dy;
+    }
     private int healthPoints;
 
     public void setHealthPoints(int healthPoints) {
@@ -31,14 +40,19 @@ public class Ship {
     }
 
     private Field field;
-    private ArrayList<Cell> cells;
+    private List<Cell> cellsShip;
+    private List<Cell> cellsBorder;
 
     public Field getField() {
         return field;
     }
 
-    public ArrayList<Cell> getCells() {
-        return cells;
+    public List<Cell> getCellsShip() {
+        return cellsShip;
+    }
+
+    public List<Cell> getCellsBorder() {
+        return cellsBorder;
     }
 
     public Ship(Field field, int sizeShip) {
@@ -47,9 +61,10 @@ public class Ship {
         this.field = field;
         this.shipHealthState = ShipState.HEALTHY;
         do {
-            this.GetPlace();
+            this.getPlace();
         } while (!this.CheckPlace());
-        this.cells = new ArrayList<Cell>();
+        this.cellsShip = new ArrayList<>();
+        this.cellsBorder = new ArrayList<>();
         this.setShip();
     }
 
@@ -67,7 +82,7 @@ public class Ship {
         } else{
             this.dy = 1;
         }
-        this.cells = new ArrayList<Cell>();
+        this.cellsShip = new ArrayList<>();
         this.setShip();
     }
 
@@ -76,7 +91,7 @@ public class Ship {
     /**
      * Случайное положение корабля на карте
      */
-    private void GetPlace() {
+    private void getPlace() {
         Random random = new Random();
         this.x = random.nextInt(10);
         this.y = random.nextInt(10);
@@ -93,20 +108,20 @@ public class Ship {
      *   Обертка для проверки на корректность расположения корабля на клетке
      */
     private boolean CheckPlace() {
-        return bypass(new TriggerStateCellCheck(this));
+        return bypass(new TriggerStateShipCheck(this));
     }
 
     /**
-     * Установка на поле корабля и его окружения
+     * Обертка для установки на поле корабля и его окружения
      */
     private void setShip() {
-        bypass(new TriggerStateCellSet(this));
+        bypass(new TriggerStateShipSet(this));
     }
 
     /**
      * Метод для проверки корректности расположения корабля и его окружения
      */
-    private boolean bypass(TriggerStateCell ts) {
+    private boolean bypass(TriggerStateShip ts) {
         int i, n, m;
 
         // корабль
@@ -117,7 +132,7 @@ public class Ship {
                 return false;
             }
         }
-        // площадка сверху и снизу корабля относительно самого корабля
+        // Проверка для бортов корабля
         for (i = 0; i < sizeShip; i++) {
             m = y + i * dy - dx;
             n = x + i * dx - dy;
@@ -130,7 +145,7 @@ public class Ship {
                 return false;
             }
         }
-        // площадка слева и справа корабля относительно самого корабля
+        // Проверка на нос и корму
         for (i = -1; i < 2; i++) {
             m = y + i * dx - dy;
             n = x + i * dy - dx;

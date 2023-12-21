@@ -21,13 +21,13 @@ public class HelloApplication extends Application {
     public static void main(String[] args) {
 //        launch();
 
-        field.Draw();
+        field.draw();
         for (int i = 0; i < 10; i+= 2){
             for (int j = 0; j < 10; j += 2){
                 field.doShot(i, j);
             }
         }
         System.out.println();
-        field.Draw();
+        field.draw();
     }
 }
