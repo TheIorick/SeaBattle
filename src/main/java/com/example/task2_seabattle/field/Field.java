@@ -12,7 +12,6 @@ public class Field {
     public Cell[][] cells;
     public List<Ship> ships;
 
-    //todo: сделать изменяемость поля
     public Field() {
         cells = new Cell[SIZE_FIELD][SIZE_FIELD];
         for (int i = 0; i < SIZE_FIELD; i++){
@@ -26,7 +25,6 @@ public class Field {
     /**
      * Заполняем поле кораблями
      */
-    //todo: сделать генерацию кораблей с учетом изменяемого поля..
     private void putShip() {
         ships = new ArrayList<Ship>();
         for(int i = 4; i > 0; i--){
@@ -37,7 +35,6 @@ public class Field {
         }
 
     }
-    //todo: сделать c учетом изменяемого поля
     public boolean isBound(int x, int y){
         return !((x < 0) || (y < 0) || (x >= SIZE_FIELD) || (y >= SIZE_FIELD));
     }
