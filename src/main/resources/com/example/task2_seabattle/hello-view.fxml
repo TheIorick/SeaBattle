@@ -172,12 +172,12 @@
                            <Font name="Candara Light" size="16.0" />
                         </font>
                      </Label>
-                     <RadioButton fx:id="btnAdd" mnemonicParsing="false" selected="true" text="Add Ship">
+                     <RadioButton fx:id="btnAdd" mnemonicParsing="false" onAction="#setAction" selected="true" text="Add Ship">
                         <toggleGroup>
                            <ToggleGroup fx:id="ActionsShip" />
                         </toggleGroup></RadioButton>
-                     <RadioButton fx:id="btnDelete" mnemonicParsing="false" text="Delete Ship" toggleGroup="$ActionsShip" />
-                     <RadioButton fx:id="btnRotate" mnemonicParsing="false" text="Rotate Ship" toggleGroup="$ActionsShip" />
+                     <RadioButton fx:id="btnDelete" mnemonicParsing="false" onAction="#setAction" text="Delete Ship" toggleGroup="$ActionsShip" />
+                     <RadioButton fx:id="btnRotate" mnemonicParsing="false" onAction="#setAction" text="Rotate Ship" toggleGroup="$ActionsShip" />
                   </children>
                   <opaqueInsets>
                      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -190,17 +190,17 @@
                            <Font name="Candara Light" size="16.0" />
                         </font>
                      </Label>
-                     <RadioButton fx:id="btnShip1" mnemonicParsing="false" selected="true" text="Ship 1">
+                     <RadioButton fx:id="btnShip1" mnemonicParsing="false" onAction="#setShip" selected="true" text="Ship 1">
                         <toggleGroup>
                            <ToggleGroup fx:id="SelectShip" />
                         </toggleGroup>
                      </RadioButton>
-                     <RadioButton fx:id="btnShip2" mnemonicParsing="false" text="Ship 2" toggleGroup="$SelectShip" />
-                     <RadioButton fx:id="btnShip3" mnemonicParsing="false" text="Ship 3" toggleGroup="$SelectShip" />
-                     <RadioButton fx:id="btnShip4" mnemonicParsing="false" text="Ship 4" toggleGroup="$SelectShip" />
-                     <RadioButton fx:id="btnMine" mnemonicParsing="false" text="Mine" toggleGroup="$SelectShip" />
-                     <RadioButton fx:id="btnMineSearcher" mnemonicParsing="false" text="Mine Searcher" toggleGroup="$SelectShip" />
-                     <RadioButton fx:id="btnSubmarine" mnemonicParsing="false" text="Submarine" toggleGroup="$SelectShip" />
+                     <RadioButton fx:id="btnShip2" mnemonicParsing="false" onAction="#setShip" text="Ship 2" toggleGroup="$SelectShip" />
+                     <RadioButton fx:id="btnShip3" mnemonicParsing="false" onAction="#setShip" text="Ship 3" toggleGroup="$SelectShip" />
+                     <RadioButton fx:id="btnShip4" mnemonicParsing="false" onAction="#setShip" text="Ship 4" toggleGroup="$SelectShip" />
+                     <RadioButton fx:id="btnMine" mnemonicParsing="false" onAction="#setShip" text="Mine" toggleGroup="$SelectShip" />
+                     <RadioButton fx:id="btnMineSearcher" mnemonicParsing="false" onAction="#setShip" text="Mine Searcher" toggleGroup="$SelectShip" />
+                     <RadioButton fx:id="btnSubmarine" mnemonicParsing="false" onAction="#setShip" text="Submarine" toggleGroup="$SelectShip" />
                   </children>
                   <opaqueInsets>
                      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

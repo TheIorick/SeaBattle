@@ -139,16 +139,44 @@ public class Controller {
     }
     @FXML
     void setOrientation(ActionEvent event) {
-        orientation.selectedToggleProperty().removeListener(orientationChangeListener); // Удаляем предыдущего слушателя
-        orientation.selectedToggleProperty().addListener(orientationChangeListener); // Добавляем нового слушателя
+        if (btnOrientX.isSelected()){
+            stateOrientation = StateOrientation.FOR_X;
+        } else{
+            stateOrientation = StateOrientation.FOR_Y;
+        }
+        System.out.println(stateOrientation.toString());
+    }
+    @FXML
+    void setAction(ActionEvent event) {
+        if (btnAdd.isSelected()){
+            stateAction = StateAction.ADD;
+        } else if (btnDelete.isSelected()) {
+            stateAction = StateAction.DELETE;
+        } else if (btnRotate.isSelected()) {
+            stateAction = StateAction.ROTATE;
+        }
+        System.out.println(stateAction.toString());
+    }
+    @FXML
+    void setShip(ActionEvent event) {
+        if (btnShip1.isSelected()){
+            stateShipUI = StateShipUI.SHIP1;
+        } else if (btnShip2.isSelected()){
+            stateShipUI = StateShipUI.SHIP2;
+        } else if (btnShip3.isSelected()){
+            stateShipUI = StateShipUI.SHIP3;
+        } else if (btnShip4.isSelected()){
+            stateShipUI = StateShipUI.SHIP4;
+        } else if (btnMine.isSelected()){
+            stateShipUI = StateShipUI.MINE;
+        } else if (btnMineSearcher.isSelected()){
+            stateShipUI = StateShipUI.MINE_SEARCHER;
+        } else if (btnSubmarine.isSelected()){
+            stateShipUI = StateShipUI.SUBMARINE;
+        }
+        System.out.println(stateShipUI.toString());
     }
 
-    private final ChangeListener<Toggle> orientationChangeListener = (observable, oldValue, newValue) -> {
-        if (orientation.getSelectedToggle() != null) {
-            RadioButton selectedRadioButton = (RadioButton) orientation.getSelectedToggle();
-            System.out.println("Выбрана кнопка: " + selectedRadioButton.getText());
-        }
-    };
 
     @FXML
     void initialize() {
