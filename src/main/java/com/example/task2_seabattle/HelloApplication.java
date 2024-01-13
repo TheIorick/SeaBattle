@@ -12,22 +12,22 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Hello!");
         stage.setScene(scene);
         stage.show();
     }
     static Field field = new Field();
     public static void main(String[] args) {
-//        launch();
+        launch();
 
-        field.draw();
-        for (int i = 0; i < 10; i+= 2){
-            for (int j = 0; j < 10; j += 2){
-                field.doShot(i, j);
-            }
-        }
-        System.out.println();
-        field.draw();
+//        field.draw();
+//        for (int i = 0; i < 10; i+= 2){
+//            for (int j = 0; j < 10; j += 2){
+//                field.doShot(i, j);
+//            }
+//        }
+//        System.out.println();
+//        field.draw();
     }
 }
