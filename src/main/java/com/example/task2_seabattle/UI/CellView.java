@@ -10,6 +10,13 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 
 public class CellView extends StackPane {
+    public CellView(){
+        setPrefSize(50, 50); // Установка размера клетки
+        Rectangle border = new Rectangle(30, 30);
+        border.setFill(Color.LIGHTBLUE);
+        border.setStroke(Color.BLACK);
+        getChildren().add(border);
+    }
 
     public CellView(Cell cell) {
         setPrefSize(50, 50); // Установка размера клетки
@@ -17,7 +24,6 @@ public class CellView extends StackPane {
         Rectangle border = new Rectangle(30, 30);
         border.setFill(Color.LIGHTBLUE);
         border.setStroke(Color.BLACK);
-
         getChildren().add(border);
 
         if (state == StateCell.HEALTHY) {

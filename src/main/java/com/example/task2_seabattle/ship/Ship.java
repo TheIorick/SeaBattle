@@ -45,7 +45,7 @@ public class Ship {
     }
 
     private Field field;
-    private List<Cell> cellsShip;
+    private final List<Cell> cellsShip;
     private List<Cell> cellsBorder;
 
     public Field getField() {

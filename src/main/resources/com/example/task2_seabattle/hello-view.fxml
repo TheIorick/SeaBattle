@@ -3,7 +3,9 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -13,16 +15,16 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="512.0" prefWidth="512.0" spacing="20.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.task2_seabattle.Controller">
+<VBox alignment="CENTER" prefHeight="512.0" prefWidth="537.0" spacing="20.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.task2_seabattle.Controller">
   <padding>
     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
   </padding>
    <Pane />
-   <SplitPane dividerPositions="0.766" prefHeight="477.0" prefWidth="488.0">
+   <SplitPane dividerPositions="0.7292929292929293" prefHeight="489.0" prefWidth="567.0">
      <items>
-       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="359.0" prefWidth="394.0">
             <children>
-               <GridPane fx:id="mainGridPane" gridLinesVisible="true" layoutX="30.0" layoutY="30.0" prefHeight="325.0" prefWidth="325.0">
+               <GridPane fx:id="mainGridPane" gridLinesVisible="true" layoutX="30.0" layoutY="30.0" prefHeight="325.0" prefWidth="325.0" AnchorPane.bottomAnchor="3.5" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="30.0">
                  <columnConstraints>
                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -47,6 +49,9 @@
                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                  </rowConstraints>
+                  <opaqueInsets>
+                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                  </opaqueInsets>
                </GridPane>
                <VBox layoutY="27.0" prefHeight="325.0" prefWidth="30.0">
                   <children>
@@ -158,19 +163,90 @@
                </HBox>
             </children>
          </AnchorPane>
-       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="363.0" prefWidth="107.0">
+       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="359.0" prefWidth="145.0">
             <children>
-               <Button layoutX="30.0" layoutY="14.0" mnemonicParsing="false" text="1 ship" />
-               <Button layoutX="30.0" layoutY="51.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="48.0" text="2 ship" />
-               <Button layoutX="30.0" layoutY="86.0" mnemonicParsing="false" text="3 ship" />
-               <Button layoutX="30.0" layoutY="127.0" mnemonicParsing="false" text="4 ship" />
-               <Button layoutX="33.0" layoutY="163.0" mnemonicParsing="false" text="mine" />
-               <Button layoutX="8.0" layoutY="199.0" mnemonicParsing="false" text="mine detector" />
-               <Button layoutX="18.0" layoutY="237.0" mnemonicParsing="false" text="submarine" />
-               <Button fx:id="btnRandom" layoutX="23.0" layoutY="278.0" mnemonicParsing="false" onAction="#draw" text="Random" />
+               <VBox alignment="TOP_CENTER" layoutX="7.0" layoutY="63.0" prefHeight="90.0" prefWidth="117.0" spacing="5.0">
+                  <children>
+                     <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="148.0" text="Actions with Ship" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
+                        <font>
+                           <Font name="Candara Light" size="16.0" />
+                        </font>
+                     </Label>
+                     <RadioButton fx:id="btnAdd" mnemonicParsing="false" selected="true" text="Add Ship">
+                        <toggleGroup>
+                           <ToggleGroup fx:id="ActionsShip" />
+                        </toggleGroup></RadioButton>
+                     <RadioButton fx:id="btnDelete" mnemonicParsing="false" text="Delete Ship" toggleGroup="$ActionsShip" />
+                     <RadioButton fx:id="btnRotate" mnemonicParsing="false" text="Rotate Ship" toggleGroup="$ActionsShip" />
+                  </children>
+                  <opaqueInsets>
+                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                  </opaqueInsets>
+               </VBox>
+               <VBox alignment="CENTER" layoutX="7.0" layoutY="153.0" prefHeight="200.0" prefWidth="109.0" spacing="5.0">
+                  <children>
+                     <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="148.0" text="Select Ship" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
+                        <font>
+                           <Font name="Candara Light" size="16.0" />
+                        </font>
+                     </Label>
+                     <RadioButton fx:id="btnShip1" mnemonicParsing="false" selected="true" text="Ship 1">
+                        <toggleGroup>
+                           <ToggleGroup fx:id="SelectShip" />
+                        </toggleGroup>
+                     </RadioButton>
+                     <RadioButton fx:id="btnShip2" mnemonicParsing="false" text="Ship 2" toggleGroup="$SelectShip" />
+                     <RadioButton fx:id="btnShip3" mnemonicParsing="false" text="Ship 3" toggleGroup="$SelectShip" />
+                     <RadioButton fx:id="btnShip4" mnemonicParsing="false" text="Ship 4" toggleGroup="$SelectShip" />
+                     <RadioButton fx:id="btnMine" mnemonicParsing="false" text="Mine" toggleGroup="$SelectShip" />
+                     <RadioButton fx:id="btnMineSearcher" mnemonicParsing="false" text="Mine Searcher" toggleGroup="$SelectShip" />
+                     <RadioButton fx:id="btnSubmarine" mnemonicParsing="false" text="Submarine" toggleGroup="$SelectShip" />
+                  </children>
+                  <opaqueInsets>
+                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                  </opaqueInsets></VBox>
+               <VBox alignment="CENTER" layoutX="101.0" layoutY="153.0" prefHeight="200.0" prefWidth="30.0" spacing="5.0">
+                  <opaqueInsets>
+                     <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+                  </opaqueInsets>
+                  <children>
+                     <Label alignment="BOTTOM_CENTER" prefHeight="20.0" prefWidth="76.0" text="Count">
+                        <font>
+                           <Font name="Candara Light" size="10.0" />
+                        </font>
+                     </Label>
+                     <Label fx:id="cntShip1" alignment="CENTER" prefHeight="17.0" prefWidth="75.0" text="0" />
+                     <Label fx:id="cntShip2" alignment="CENTER" prefHeight="17.0" prefWidth="75.0" text="0" />
+                     <Label fx:id="cntShip3" alignment="CENTER" prefHeight="17.0" prefWidth="75.0" text="0" />
+                     <Label fx:id="cntShip4" alignment="CENTER" prefHeight="17.0" prefWidth="75.0" text="0" />
+                     <Label fx:id="cntMine" alignment="CENTER" prefHeight="17.0" prefWidth="75.0" text="0" />
+                     <Label fx:id="cntMineSearcher" alignment="CENTER" prefHeight="17.0" prefWidth="75.0" text="0" />
+                     <Label fx:id="cntSubmarine" alignment="CENTER" prefHeight="17.0" prefWidth="75.0" text="0" />
+                  </children>
+               </VBox>
+               <VBox alignment="CENTER" layoutX="7.0" prefHeight="49.0" prefWidth="117.0" spacing="3.0">
+                  <children>
+                     <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="148.0" text="Orientation" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
+                        <font>
+                           <Font name="Candara Light" size="16.0" />
+                        </font>
+                     </Label>
+                     <RadioButton fx:id="btnOrientX" mnemonicParsing="false" onAction="#setOrientation" selected="true" text="For X">
+                        <toggleGroup>
+                           <ToggleGroup fx:id="orientation" />
+                        </toggleGroup>
+                     </RadioButton>
+                     <RadioButton fx:id="btnOrientY" mnemonicParsing="false" onAction="#setOrientation" text="For Y" toggleGroup="$orientation" />
+                  </children>
+               </VBox>
             </children>
          </AnchorPane>
      </items>
    </SplitPane>
-   <Pane prefHeight="200.0" prefWidth="200.0" />
+   <Pane prefHeight="200.0" prefWidth="200.0">
+      <children>
+         <Button layoutX="14.0" layoutY="26.0" mnemonicParsing="false" onAction="#clear" text="Clear" />
+         <Button fx:id="btnRandom" layoutX="83.0" layoutY="26.0" mnemonicParsing="false" onAction="#random" text="Random" />
+      </children>
+   </Pane>
 </VBox>
