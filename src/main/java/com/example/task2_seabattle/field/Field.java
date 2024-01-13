@@ -33,7 +33,12 @@ public class Field {
                 ships.add(ship);
             }
         }
-
+        Ship mine = new Ship(this, ShipState.MINE);
+        ships.add(mine);
+        Ship mineSearcher = new Ship(this, ShipState.MINE_SEARCHER);
+        ships.add(mineSearcher);
+        Ship submarine = new Ship(this, ShipState.SUBMARINE);
+        ships.add(submarine);
     }
     public boolean isBound(int x, int y){
         return !((x < 0) || (y < 0) || (x >= SIZE_FIELD) || (y >= SIZE_FIELD));

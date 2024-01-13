@@ -4,14 +4,13 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import com.example.task2_seabattle.UI.CellView;
-import com.example.task2_seabattle.UI.GameBoardView;
 import com.example.task2_seabattle.field.Field;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 
 public class Controller {
+    static final int SIZE_FIELD = 10;
 
     @FXML
     private ResourceBundle resources;
@@ -29,11 +28,9 @@ public class Controller {
     void draw() {
         Field gameBoard = new Field();
         mainGridPane.getChildren().clear(); // Очистить все дочерние элементы из mainGridPane
-        int numRows = 10;
-        int numCols = 10;
-        for (int row = 0; row < numRows; row++) {
-            for (int col = 0; col < numCols; col++) {
-                CellView cellView = new CellView(gameBoard.getStateCell(row, col));
+        for (int row = 0; row < SIZE_FIELD; row++) {
+            for (int col = 0; col < SIZE_FIELD; col++) {
+                CellView cellView = new CellView(gameBoard.cells[row][col]);
                 mainGridPane.add(cellView, col, row);
             }
         }

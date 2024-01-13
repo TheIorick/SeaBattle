@@ -1,7 +1,5 @@
 package com.example.task2_seabattle;
 
-import com.example.task2_seabattle.UI.GameBoardView;
-import com.example.task2_seabattle.field.Field;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;

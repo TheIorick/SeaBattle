@@ -33,6 +33,11 @@ public class Ship {
     }
 
     private int sizeShip;
+
+    public ShipState getShipHealthState() {
+        return shipHealthState;
+    }
+
     private ShipState shipHealthState;
 
     public void setShipHealthState(ShipState shipHealthState) {
@@ -60,6 +65,34 @@ public class Ship {
         this.healthPoints = sizeShip;
         this.field = field;
         this.shipHealthState = ShipState.HEALTHY;
+        do {
+            this.getPlace();
+        } while (!this.CheckPlace());
+        this.cellsShip = new ArrayList<>();
+        this.cellsBorder = new ArrayList<>();
+        this.setShip();
+    }
+    public Ship (Field field, ShipState state){
+        switch (state){
+            case SUBMARINE -> {
+                this.sizeShip = 3;
+                this.healthPoints = 1;
+                this.field = field;
+                this.shipHealthState = ShipState.SUBMARINE;
+            }
+            case MINE -> {
+                this.sizeShip = 1;
+                this.healthPoints = 1;
+                this.field = field;
+                this.shipHealthState = ShipState.MINE;
+            }
+            case MINE_SEARCHER -> {
+                this.sizeShip = 1;
+                this.healthPoints = 1;
+                this.field = field;
+                this.shipHealthState = ShipState.MINE_SEARCHER;
+            }
+        }
         do {
             this.getPlace();
         } while (!this.CheckPlace());
