@@ -46,7 +46,7 @@ public class Ship {
     }
 
     private Field field;
-    private final List<Cell> cellsShip;
+    private List<Cell> cellsShip;
     private List<Cell> cellsBorder;
 
     public Field getField() {
@@ -131,8 +131,6 @@ public class Ship {
         }
         this.x = x;
         this.y = y;
-        this.dy = 0;
-        this.dx = 0;
         if(directionX){
             this.dx = 1;
         } else{

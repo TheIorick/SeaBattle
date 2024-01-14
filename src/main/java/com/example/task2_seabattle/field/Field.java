@@ -52,10 +52,8 @@ public class Field {
             case MINE, SUBMARINE, MINE_SEARCHER -> 0;
         };
         Ship ship = new Ship(this, typeShipUI, sizeShip, x, y, orient);
-        if(!ship.checkPlace()){
-            return;
-        }
         ships.add(ship);
+        draw();
     }
     private void putShip() {
         ships = new ArrayList<Ship>();
@@ -142,8 +140,8 @@ public class Field {
 //        }
 //    }
     public void draw() {
-        for(int j=0; j<10; j++) {
-            for(int i=0; i<10; i++) {
+        for(int i=0; i<10; i++) {
+            for(int j=0; j<10; j++) {
                 System.out.print(cells[i][j].stateCell.toString() + " ");
             }
             System.out.println();

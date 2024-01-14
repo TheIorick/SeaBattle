@@ -8,6 +8,7 @@ import com.example.task2_seabattle.UI.StateAction;
 import com.example.task2_seabattle.UI.StateOrientation;
 import com.example.task2_seabattle.UI.TypeShipUI;
 import com.example.task2_seabattle.field.Field;
+import com.example.task2_seabattle.field.StateCell;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -17,6 +18,7 @@ import javafx.scene.layout.GridPane;
 public class Controller {
     static final int SIZE_FIELD = 10;
     static final int SIZE_CELL = 32;
+    int cntShip1, cntShip2, cntShip3, cntShip4, cntMine, cntMineSearcher, cntSubmarine = 0;
     Field gameField;
     StateOrientation stateOrientation = StateOrientation.FOR_X;
     StateAction stateAction = StateAction.ADD;
@@ -108,13 +110,20 @@ public class Controller {
                 mainGridPane.add(cellView, col, row);
             }
         }
-        labelCntMine.setText("1");
-        labelCntMineSearcher.setText("1");
-        labelCntSubmarine.setText("1");
-        labelCntShip1.setText("4");
-        labelCntShip2.setText("3");
-        labelCntShip3.setText("2");
-        labelCntShip4.setText("1");
+        cntShip1 = 4;
+        cntShip2 = 3;
+        cntShip3 = 2;
+        cntShip4 = 1;
+        cntMine = 1;
+        cntMineSearcher = 1;
+        cntSubmarine = 1;
+        labelCntMine.setText(String.valueOf(cntMine));
+        labelCntMineSearcher.setText(String.valueOf(cntMineSearcher));
+        labelCntSubmarine.setText(String.valueOf(cntSubmarine));
+        labelCntShip1.setText(String.valueOf(cntShip1));
+        labelCntShip2.setText(String.valueOf(cntShip2));
+        labelCntShip3.setText(String.valueOf(cntShip3));
+        labelCntShip4.setText(String.valueOf(cntShip4));
     }
 
     @FXML
@@ -127,6 +136,7 @@ public class Controller {
                 mainGridPane.add(cellView, col, row);
             }
         }
+        cntShip1 = cntShip2 = cntShip3 = cntShip4 = cntMine = cntMineSearcher = cntSubmarine = 0;
         labelCntMine.setText("0");
         labelCntMineSearcher.setText("0");
         labelCntSubmarine.setText("0");
@@ -158,21 +168,32 @@ public class Controller {
     @FXML
     void setShip(ActionEvent event) {
         if (btnShip1.isSelected()){
-            typeShipUI = typeShipUI.SHIP1;
+            typeShipUI = TypeShipUI.SHIP1;
         } else if (btnShip2.isSelected()){
-            typeShipUI = typeShipUI.SHIP2;
+            typeShipUI = TypeShipUI.SHIP2;
         } else if (btnShip3.isSelected()){
-            typeShipUI = typeShipUI.SHIP3;
+            typeShipUI = TypeShipUI.SHIP3;
         } else if (btnShip4.isSelected()){
-            typeShipUI = typeShipUI.SHIP4;
+            typeShipUI = TypeShipUI.SHIP4;
         } else if (btnMine.isSelected()){
-            typeShipUI = typeShipUI.MINE;
+            typeShipUI = TypeShipUI.MINE;
         } else if (btnMineSearcher.isSelected()){
-            typeShipUI = typeShipUI.MINE_SEARCHER;
+            typeShipUI = TypeShipUI.MINE_SEARCHER;
         } else if (btnSubmarine.isSelected()){
-            typeShipUI = typeShipUI.SUBMARINE;
+            typeShipUI = TypeShipUI.SUBMARINE;
         }
         System.out.println(typeShipUI.toString());
+    }
+
+    private boolean borderCheck(int size, int x, int y, StateOrientation orient){
+        switch (orient){
+            case FOR_X -> {
+                return size + x <= 10;
+            }
+            case FOR_Y -> {
+                return size + y <= 10;
+            }
+        } return false;
     }
 
     @FXML
@@ -180,7 +201,43 @@ public class Controller {
         int colIndex = (int) (event.getX() / SIZE_CELL); // Определяем индекс столбца
         int rowIndex = (int) (event.getY() / SIZE_CELL); // Определяем индекс строки
         if (btnAdd.isSelected()){
-
+            if(btnShip1.isSelected() && (cntShip1 > 0) && !(gameField.getStateCell(rowIndex, colIndex) == StateCell.BORDER)) {
+                gameField.addShip(typeShipUI, stateOrientation, colIndex, rowIndex);
+                cntShip1--;
+                labelCntShip1.setText(String.valueOf(cntShip1));
+            } else if(btnShip2.isSelected() && (cntShip2 > 0) && !(gameField.getStateCell(rowIndex, colIndex) == StateCell.BORDER) && borderCheck(2, colIndex, rowIndex, stateOrientation)){
+                gameField.addShip(typeShipUI, stateOrientation, colIndex, rowIndex);
+                cntShip2--;
+                labelCntShip2.setText(String.valueOf(cntShip2));
+            } else if(btnShip3.isSelected() && (cntShip3 > 0) && !(gameField.getStateCell(rowIndex, colIndex) == StateCell.BORDER) && borderCheck(3, colIndex, rowIndex, stateOrientation)){
+                gameField.addShip(typeShipUI, stateOrientation, colIndex, rowIndex);
+                cntShip3--;
+                labelCntShip3.setText(String.valueOf(cntShip3));
+            } else if(btnShip4.isSelected() && (cntShip4 > 0) && !(gameField.getStateCell(rowIndex, colIndex) == StateCell.BORDER) && borderCheck(4, colIndex, rowIndex, stateOrientation)){
+                gameField.addShip(typeShipUI, stateOrientation, colIndex, rowIndex);
+                cntShip4--;
+                labelCntShip4.setText(String.valueOf(cntShip4));
+            } else if(btnMine.isSelected() && (cntMine > 0) && !(gameField.getStateCell(rowIndex, colIndex) == StateCell.BORDER)){
+                gameField.addShip(typeShipUI, stateOrientation, colIndex, rowIndex);
+                cntMine--;
+                labelCntMine.setText(String.valueOf(cntMine));
+            } else if(btnMineSearcher.isSelected() && (cntMineSearcher > 0) && !(gameField.getStateCell(rowIndex, colIndex) == StateCell.BORDER)){
+                gameField.addShip(typeShipUI, stateOrientation, colIndex, rowIndex);
+                cntMineSearcher--;
+                labelCntMineSearcher.setText(String.valueOf(cntMineSearcher));
+            } else if(btnSubmarine.isSelected() && (cntSubmarine > 0) && !(gameField.getStateCell(rowIndex, colIndex) == StateCell.BORDER)){
+                gameField.addShip(typeShipUI, stateOrientation, colIndex, rowIndex);
+                cntSubmarine--;
+                labelCntSubmarine.setText(String.valueOf(cntSubmarine));
+            }
+            System.out.println(colIndex + " " + rowIndex);
+        }
+        mainGridPane.getChildren().clear(); // Очистить все дочерние элементы из mainGridPane
+        for (int row = 0; row < SIZE_FIELD; row++) {
+            for (int col = 0; col < SIZE_FIELD; col++) {
+                CellView cellView = new CellView(gameField.cells[row][col]);
+                mainGridPane.add(cellView, col, row);
+            }
         }
     }
     @FXML
