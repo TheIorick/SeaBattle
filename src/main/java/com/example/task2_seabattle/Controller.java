@@ -11,12 +11,15 @@ import com.example.task2_seabattle.field.Field;
 import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 
 public class Controller {
     static final int SIZE_FIELD = 10;
+    static final int SIZE_CELL = 32;
     Field gameField;
     StateOrientation stateOrientation = StateOrientation.FOR_X;
     StateAction stateAction = StateAction.ADD;
@@ -76,9 +79,6 @@ public class Controller {
     private RadioButton btnSubmarine;
 
     @FXML
-    private RadioButton btnTranslate;
-
-    @FXML
     private Label cntMine;
 
     @FXML
@@ -103,10 +103,11 @@ public class Controller {
     private GridPane mainGridPane;
     @FXML
     void clear() {
+        gameField = new Field(true);
         mainGridPane.getChildren().clear(); // Очистить все дочерние элементы из mainGridPane
         for (int row = 0; row < SIZE_FIELD; row++) {
             for (int col = 0; col < SIZE_FIELD; col++) {
-                CellView cellView = new CellView();
+                CellView cellView = new CellView(gameField.cells[row][col]);
                 mainGridPane.add(cellView, col, row);
             }
         }
@@ -144,7 +145,7 @@ public class Controller {
         } else{
             stateOrientation = StateOrientation.FOR_Y;
         }
-        System.out.println(stateOrientation.toString());
+        System.out.println(stateOrientation);
     }
     @FXML
     void setAction(ActionEvent event) {
@@ -177,7 +178,12 @@ public class Controller {
         System.out.println(stateShipUI.toString());
     }
 
-
+    @FXML
+    void mouseClickedEvent(MouseEvent event) {
+        int colIndex = (int) (event.getX() / SIZE_CELL); // Определяем индекс столбца
+        int rowIndex = (int) (event.getY() / SIZE_CELL); // Определяем индекс строки
+        System.out.println("Нажатие на клетку: [" + colIndex + ", " + rowIndex + "]");
+    }
     @FXML
     void initialize() {
         btnDelete.setToggleGroup(ActionsShip);
@@ -203,5 +209,4 @@ public class Controller {
         assert btnRandom != null : "fx:id=\"btnRandom\" was not injected: check your FXML file 'hello-view.fxml'.";
         assert mainGridPane != null : "fx:id=\"mainGridPane\" was not injected: check your FXML file 'hello-view.fxml'.";
     }
-
 }

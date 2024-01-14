@@ -11,7 +11,7 @@ import javafx.scene.shape.Rectangle;
 
 public class CellView extends StackPane {
     public CellView(){
-        setPrefSize(50, 50); // Установка размера клетки
+        setPrefSize(30, 30); // Установка размера клетки
         Rectangle border = new Rectangle(30, 30);
         border.setFill(Color.LIGHTBLUE);
         border.setStroke(Color.BLACK);
@@ -19,7 +19,7 @@ public class CellView extends StackPane {
     }
 
     public CellView(Cell cell) {
-        setPrefSize(50, 50); // Установка размера клетки
+        setPrefSize(30, 30); // Установка размера клетки
         StateCell state = cell.stateCell;
         Rectangle border = new Rectangle(30, 30);
         border.setFill(Color.LIGHTBLUE);

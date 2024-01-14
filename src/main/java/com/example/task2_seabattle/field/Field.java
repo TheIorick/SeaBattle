@@ -22,6 +22,15 @@ public class Field {
         this.putShip();
     }
 
+    public Field(boolean empty){
+        cells = new Cell[SIZE_FIELD][SIZE_FIELD];
+        for (int i = 0; i < SIZE_FIELD; i++){
+            for (int j = 0; j < SIZE_FIELD; j++){
+                cells[i][j] = new Cell(i, j);
+            }
+        }
+        ships = new ArrayList<Ship>();
+    }
     /**
      * Заполняем поле кораблями
      */

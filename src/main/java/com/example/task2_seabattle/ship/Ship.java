@@ -116,6 +116,7 @@ public class Ship {
             this.dy = 1;
         }
         this.cellsShip = new ArrayList<>();
+        this.cellsBorder = new ArrayList<>();
         this.setShip();
     }
 
