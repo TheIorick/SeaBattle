@@ -6,16 +6,13 @@ import java.util.ResourceBundle;
 import com.example.task2_seabattle.UI.CellView;
 import com.example.task2_seabattle.UI.StateAction;
 import com.example.task2_seabattle.UI.StateOrientation;
-import com.example.task2_seabattle.UI.StateShipUI;
+import com.example.task2_seabattle.UI.TypeShipUI;
 import com.example.task2_seabattle.field.Field;
-import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
 
 public class Controller {
     static final int SIZE_FIELD = 10;
@@ -23,7 +20,7 @@ public class Controller {
     Field gameField;
     StateOrientation stateOrientation = StateOrientation.FOR_X;
     StateAction stateAction = StateAction.ADD;
-    StateShipUI stateShipUI = StateShipUI.SHIP1;
+    TypeShipUI typeShipUI = TypeShipUI.SHIP1;
 
     @FXML
     private ResourceBundle resources;
@@ -79,25 +76,25 @@ public class Controller {
     private RadioButton btnSubmarine;
 
     @FXML
-    private Label cntMine;
+    private Label labelCntMine;
 
     @FXML
-    private Label cntMineSearcher;
+    private Label labelCntMineSearcher;
 
     @FXML
-    private Label cntShip1;
+    private Label labelCntShip1;
 
     @FXML
-    private Label cntShip2;
+    private Label labelCntShip2;
 
     @FXML
-    private Label cntShip3;
+    private Label labelCntShip3;
 
     @FXML
-    private Label cntShip4;
+    private Label labelCntShip4;
 
     @FXML
-    private Label cntSubmarine;
+    private Label labelCntSubmarine;
 
     @FXML
     private GridPane mainGridPane;
@@ -111,13 +108,13 @@ public class Controller {
                 mainGridPane.add(cellView, col, row);
             }
         }
-        cntMine.setText("1");
-        cntMineSearcher.setText("1");
-        cntSubmarine.setText("1");
-        cntShip1.setText("4");
-        cntShip2.setText("3");
-        cntShip3.setText("2");
-        cntShip4.setText("1");
+        labelCntMine.setText("1");
+        labelCntMineSearcher.setText("1");
+        labelCntSubmarine.setText("1");
+        labelCntShip1.setText("4");
+        labelCntShip2.setText("3");
+        labelCntShip3.setText("2");
+        labelCntShip4.setText("1");
     }
 
     @FXML
@@ -130,13 +127,13 @@ public class Controller {
                 mainGridPane.add(cellView, col, row);
             }
         }
-        cntMine.setText("0");
-        cntMineSearcher.setText("0");
-        cntSubmarine.setText("0");
-        cntShip1.setText("0");
-        cntShip2.setText("0");
-        cntShip3.setText("0");
-        cntShip4.setText("0");
+        labelCntMine.setText("0");
+        labelCntMineSearcher.setText("0");
+        labelCntSubmarine.setText("0");
+        labelCntShip1.setText("0");
+        labelCntShip2.setText("0");
+        labelCntShip3.setText("0");
+        labelCntShip4.setText("0");
     }
     @FXML
     void setOrientation(ActionEvent event) {
@@ -161,28 +158,30 @@ public class Controller {
     @FXML
     void setShip(ActionEvent event) {
         if (btnShip1.isSelected()){
-            stateShipUI = StateShipUI.SHIP1;
+            typeShipUI = typeShipUI.SHIP1;
         } else if (btnShip2.isSelected()){
-            stateShipUI = StateShipUI.SHIP2;
+            typeShipUI = typeShipUI.SHIP2;
         } else if (btnShip3.isSelected()){
-            stateShipUI = StateShipUI.SHIP3;
+            typeShipUI = typeShipUI.SHIP3;
         } else if (btnShip4.isSelected()){
-            stateShipUI = StateShipUI.SHIP4;
+            typeShipUI = typeShipUI.SHIP4;
         } else if (btnMine.isSelected()){
-            stateShipUI = StateShipUI.MINE;
+            typeShipUI = typeShipUI.MINE;
         } else if (btnMineSearcher.isSelected()){
-            stateShipUI = StateShipUI.MINE_SEARCHER;
+            typeShipUI = typeShipUI.MINE_SEARCHER;
         } else if (btnSubmarine.isSelected()){
-            stateShipUI = StateShipUI.SUBMARINE;
+            typeShipUI = typeShipUI.SUBMARINE;
         }
-        System.out.println(stateShipUI.toString());
+        System.out.println(typeShipUI.toString());
     }
 
     @FXML
     void mouseClickedEvent(MouseEvent event) {
         int colIndex = (int) (event.getX() / SIZE_CELL); // Определяем индекс столбца
         int rowIndex = (int) (event.getY() / SIZE_CELL); // Определяем индекс строки
-        System.out.println("Нажатие на клетку: [" + colIndex + ", " + rowIndex + "]");
+        if (btnAdd.isSelected()){
+
+        }
     }
     @FXML
     void initialize() {

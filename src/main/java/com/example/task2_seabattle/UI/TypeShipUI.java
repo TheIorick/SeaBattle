@@ -1,6 +1,6 @@
 package com.example.task2_seabattle.UI;
 
-public enum StateShipUI {
+public enum TypeShipUI {
     SHIP1,
     SHIP2,
     SHIP3,

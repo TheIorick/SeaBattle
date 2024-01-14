@@ -227,13 +227,13 @@
                            <Font name="Candara Light" size="10.0" />
                         </font>
                      </Label>
-                     <Label fx:id="cntShip1" alignment="CENTER" prefHeight="17.0" prefWidth="75.0" text="0" />
-                     <Label fx:id="cntShip2" alignment="CENTER" prefHeight="17.0" prefWidth="75.0" text="0" />
-                     <Label fx:id="cntShip3" alignment="CENTER" prefHeight="17.0" prefWidth="75.0" text="0" />
-                     <Label fx:id="cntShip4" alignment="CENTER" prefHeight="17.0" prefWidth="75.0" text="0" />
-                     <Label fx:id="cntMine" alignment="CENTER" prefHeight="17.0" prefWidth="75.0" text="0" />
-                     <Label fx:id="cntMineSearcher" alignment="CENTER" prefHeight="17.0" prefWidth="75.0" text="0" />
-                     <Label fx:id="cntSubmarine" alignment="CENTER" prefHeight="17.0" prefWidth="75.0" text="0" />
+                     <Label fx:id="labelCntShip1" alignment="CENTER" prefHeight="17.0" prefWidth="75.0" text="0" />
+                     <Label fx:id="labelCntShip2" alignment="CENTER" prefHeight="17.0" prefWidth="75.0" text="0" />
+                     <Label fx:id="labelCntShip3" alignment="CENTER" prefHeight="17.0" prefWidth="75.0" text="0" />
+                     <Label fx:id="labelCntShip4" alignment="CENTER" prefHeight="17.0" prefWidth="75.0" text="0" />
+                     <Label fx:id="labelCntMine" alignment="CENTER" prefHeight="17.0" prefWidth="75.0" text="0" />
+                     <Label fx:id="labelCntMineSearcher" alignment="CENTER" prefHeight="17.0" prefWidth="75.0" text="0" />
+                     <Label fx:id="labelCntSubmarine" alignment="CENTER" prefHeight="17.0" prefWidth="75.0" text="0" />
                   </children>
                </VBox>
                <VBox alignment="CENTER" layoutX="7.0" prefHeight="49.0" prefWidth="117.0" spacing="3.0">

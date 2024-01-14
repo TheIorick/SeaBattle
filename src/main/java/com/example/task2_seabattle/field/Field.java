@@ -1,11 +1,15 @@
 package com.example.task2_seabattle.field;
 
+import com.example.task2_seabattle.UI.StateOrientation;
+import com.example.task2_seabattle.UI.TypeShipUI;
 import com.example.task2_seabattle.ship.Ship;
 import com.example.task2_seabattle.ship.ShipState;
 
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.example.task2_seabattle.UI.TypeShipUI.*;
 
 public class Field {
     final int SIZE_FIELD = 10;
@@ -34,6 +38,25 @@ public class Field {
     /**
      * Заполняем поле кораблями
      */
+
+    public void addShip(TypeShipUI typeShipUI, StateOrientation orientation, int x, int y){
+        boolean orient = switch (orientation) {
+            case FOR_X -> true;
+            case FOR_Y -> false;
+        };
+        int sizeShip = switch (typeShipUI){
+            case SHIP1 -> sizeShip = 1;
+            case SHIP2 -> sizeShip = 2;
+            case SHIP3 -> sizeShip = 3;
+            case SHIP4 -> sizeShip = 4;
+            case MINE, SUBMARINE, MINE_SEARCHER -> 0;
+        };
+        Ship ship = new Ship(this, typeShipUI, sizeShip, x, y, orient);
+        if(!ship.checkPlace()){
+            return;
+        }
+        ships.add(ship);
+    }
     private void putShip() {
         ships = new ArrayList<Ship>();
         for(int i = 4; i > 0; i--){
@@ -42,11 +65,11 @@ public class Field {
                 ships.add(ship);
             }
         }
-        Ship mine = new Ship(this, ShipState.MINE);
+        Ship mine = new Ship(this, MINE);
         ships.add(mine);
-        Ship mineSearcher = new Ship(this, ShipState.MINE_SEARCHER);
+        Ship mineSearcher = new Ship(this, MINE_SEARCHER);
         ships.add(mineSearcher);
-        Ship submarine = new Ship(this, ShipState.SUBMARINE);
+        Ship submarine = new Ship(this, SUBMARINE);
         ships.add(submarine);
     }
     public boolean isBound(int x, int y){

@@ -1,5 +1,6 @@
 package com.example.task2_seabattle.ship;
 
+import com.example.task2_seabattle.UI.TypeShipUI;
 import com.example.task2_seabattle.field.Cell;
 import com.example.task2_seabattle.field.Field;
 import com.example.task2_seabattle.ship.triggerState.TriggerStateShip;
@@ -67,12 +68,12 @@ public class Ship {
         this.shipHealthState = ShipState.HEALTHY;
         do {
             this.getPlace();
-        } while (!this.CheckPlace());
+        } while (this.checkPlace());
         this.cellsShip = new ArrayList<>();
         this.cellsBorder = new ArrayList<>();
         this.setShip();
     }
-    public Ship (Field field, ShipState state){
+    public Ship (Field field, TypeShipUI state){
         switch (state){
             case SUBMARINE -> {
                 this.sizeShip = 3;
@@ -95,17 +96,39 @@ public class Ship {
         }
         do {
             this.getPlace();
-        } while (!this.CheckPlace());
+        } while (this.checkPlace());
         this.cellsShip = new ArrayList<>();
         this.cellsBorder = new ArrayList<>();
         this.setShip();
     }
 
-    public Ship(Field field, int sizeShip, int x, int y, boolean directionX) {
-        this.sizeShip = sizeShip;
-        this.healthPoints = sizeShip;
-        this.field = field;
-        this.shipHealthState = ShipState.HEALTHY;
+    public Ship(Field field, TypeShipUI state, int sizeShip, int x, int y, boolean directionX) {
+        switch (state){
+            case SUBMARINE -> {
+                this.sizeShip = 3;
+                this.healthPoints = 1;
+                this.field = field;
+                this.shipHealthState = ShipState.SUBMARINE;
+            }
+            case MINE -> {
+                this.sizeShip = 1;
+                this.healthPoints = 1;
+                this.field = field;
+                this.shipHealthState = ShipState.MINE;
+            }
+            case MINE_SEARCHER -> {
+                this.sizeShip = 1;
+                this.healthPoints = 1;
+                this.field = field;
+                this.shipHealthState = ShipState.MINE_SEARCHER;
+            }
+            case SHIP1, SHIP2, SHIP3, SHIP4 -> {
+                this.sizeShip = sizeShip;
+                this.healthPoints = sizeShip;
+                this.field = field;
+                this.shipHealthState = ShipState.HEALTHY;
+            }
+        }
         this.x = x;
         this.y = y;
         this.dy = 0;
@@ -141,8 +164,8 @@ public class Ship {
     /**
      *   Обертка для проверки на корректность расположения корабля на клетке
      */
-    private boolean CheckPlace() {
-        return bypass(new TriggerStateShipCheck(this));
+    public boolean checkPlace() {
+        return !bypass(new TriggerStateShipCheck(this));
     }
 
     /**
