@@ -30,7 +30,7 @@ public class CellView extends StackPane {
             ShipState shipState = cell.elementInCell.getShipHealthState();
             switch (shipState){
                 case HEALTHY -> {
-                    Circle ship = new Circle(10, Color.DARKGRAY);
+                    Circle ship = new Circle(10, Color.DARKSLATEGRAY);
                     getChildren().add(ship);
                 }
                 case MINE_SEARCHER -> {

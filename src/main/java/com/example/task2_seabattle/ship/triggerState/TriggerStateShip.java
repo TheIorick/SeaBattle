@@ -12,6 +12,6 @@ public abstract class TriggerStateShip {
         this.field = ship.getField();
     }
 
-    abstract public boolean Ship(int n, int m);
+    abstract public boolean ship(int n, int m);
     abstract public boolean border(int n, int m);
 }

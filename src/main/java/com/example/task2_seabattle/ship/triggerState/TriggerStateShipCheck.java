@@ -1,5 +1,6 @@
 package com.example.task2_seabattle.ship.triggerState;
 
+import com.example.task2_seabattle.field.Field;
 import com.example.task2_seabattle.field.StateCell;
 import com.example.task2_seabattle.ship.Ship;
 
@@ -8,8 +9,9 @@ public class TriggerStateShipCheck extends TriggerStateShip {
     public TriggerStateShipCheck(Ship ship) {
         super(ship);
     }
+
     @Override
-    public boolean Ship(int n, int m) {
+    public boolean ship(int n, int m) {
         StateCell stateCell = field.getStateCell(n, m);
         return (stateCell == StateCell.WATER);
     }

@@ -44,8 +44,6 @@ public class Controller {
 
     @FXML
     private RadioButton btnDelete;
-    @FXML
-    private RadioButton btnRotate;
 
     @FXML
     private RadioButton btnMine;
@@ -160,8 +158,6 @@ public class Controller {
             stateAction = StateAction.ADD;
         } else if (btnDelete.isSelected()) {
             stateAction = StateAction.DELETE;
-        } else if (btnRotate.isSelected()) {
-            stateAction = StateAction.ROTATE;
         }
         System.out.println(stateAction.toString());
     }
@@ -201,36 +197,11 @@ public class Controller {
         int colIndex = (int) (event.getX() / SIZE_CELL); // Определяем индекс столбца
         int rowIndex = (int) (event.getY() / SIZE_CELL); // Определяем индекс строки
         if (btnAdd.isSelected()){
-            if(btnShip1.isSelected() && (cntShip1 > 0) && !(gameField.getStateCell(rowIndex, colIndex) == StateCell.BORDER)) {
-                gameField.addShip(typeShipUI, stateOrientation, colIndex, rowIndex);
-                cntShip1--;
-                labelCntShip1.setText(String.valueOf(cntShip1));
-            } else if(btnShip2.isSelected() && (cntShip2 > 0) && !(gameField.getStateCell(rowIndex, colIndex) == StateCell.BORDER) && borderCheck(2, colIndex, rowIndex, stateOrientation)){
-                gameField.addShip(typeShipUI, stateOrientation, colIndex, rowIndex);
-                cntShip2--;
-                labelCntShip2.setText(String.valueOf(cntShip2));
-            } else if(btnShip3.isSelected() && (cntShip3 > 0) && !(gameField.getStateCell(rowIndex, colIndex) == StateCell.BORDER) && borderCheck(3, colIndex, rowIndex, stateOrientation)){
-                gameField.addShip(typeShipUI, stateOrientation, colIndex, rowIndex);
-                cntShip3--;
-                labelCntShip3.setText(String.valueOf(cntShip3));
-            } else if(btnShip4.isSelected() && (cntShip4 > 0) && !(gameField.getStateCell(rowIndex, colIndex) == StateCell.BORDER) && borderCheck(4, colIndex, rowIndex, stateOrientation)){
-                gameField.addShip(typeShipUI, stateOrientation, colIndex, rowIndex);
-                cntShip4--;
-                labelCntShip4.setText(String.valueOf(cntShip4));
-            } else if(btnMine.isSelected() && (cntMine > 0) && !(gameField.getStateCell(rowIndex, colIndex) == StateCell.BORDER)){
-                gameField.addShip(typeShipUI, stateOrientation, colIndex, rowIndex);
-                cntMine--;
-                labelCntMine.setText(String.valueOf(cntMine));
-            } else if(btnMineSearcher.isSelected() && (cntMineSearcher > 0) && !(gameField.getStateCell(rowIndex, colIndex) == StateCell.BORDER)){
-                gameField.addShip(typeShipUI, stateOrientation, colIndex, rowIndex);
-                cntMineSearcher--;
-                labelCntMineSearcher.setText(String.valueOf(cntMineSearcher));
-            } else if(btnSubmarine.isSelected() && (cntSubmarine > 0) && !(gameField.getStateCell(rowIndex, colIndex) == StateCell.BORDER)){
-                gameField.addShip(typeShipUI, stateOrientation, colIndex, rowIndex);
-                cntSubmarine--;
-                labelCntSubmarine.setText(String.valueOf(cntSubmarine));
-            }
+            addEvent(rowIndex, colIndex);
             System.out.println(colIndex + " " + rowIndex);
+        }
+        if (btnDelete.isSelected()){
+            deleteEvent(colIndex, rowIndex);
         }
         mainGridPane.getChildren().clear(); // Очистить все дочерние элементы из mainGridPane
         for (int row = 0; row < SIZE_FIELD; row++) {
@@ -240,11 +211,75 @@ public class Controller {
             }
         }
     }
+
+    private void addEvent(int rowIndex, int colIndex){
+        if(btnShip1.isSelected() && (cntShip1 > 0) && !(gameField.getStateCell(rowIndex, colIndex) == StateCell.BORDER)) {
+            gameField.addShip(typeShipUI, stateOrientation, colIndex, rowIndex);
+            cntShip1--;
+            labelCntShip1.setText(String.valueOf(cntShip1));
+        } else if(btnShip2.isSelected() && (cntShip2 > 0) && !(gameField.getStateCell(rowIndex, colIndex) == StateCell.BORDER) && borderCheck(2, colIndex, rowIndex, stateOrientation)){
+            if(!gameField.addShip(typeShipUI, stateOrientation, colIndex, rowIndex)){
+                return;
+            }
+            cntShip2--;
+            labelCntShip2.setText(String.valueOf(cntShip2));
+        } else if(btnShip3.isSelected() && (cntShip3 > 0) && !(gameField.getStateCell(rowIndex, colIndex) == StateCell.BORDER) && borderCheck(3, colIndex, rowIndex, stateOrientation)){
+            if(!gameField.addShip(typeShipUI, stateOrientation, colIndex, rowIndex)){
+                return;
+            }
+            cntShip3--;
+            labelCntShip3.setText(String.valueOf(cntShip3));
+        } else if(btnShip4.isSelected() && (cntShip4 > 0) && !(gameField.getStateCell(rowIndex, colIndex) == StateCell.BORDER) && borderCheck(4, colIndex, rowIndex, stateOrientation)){
+            if(!gameField.addShip(typeShipUI, stateOrientation, colIndex, rowIndex)){
+                return;
+            }
+            cntShip4--;
+            labelCntShip4.setText(String.valueOf(cntShip4));
+        } else if(btnMine.isSelected() && (cntMine > 0) && !(gameField.getStateCell(rowIndex, colIndex) == StateCell.BORDER)){
+            gameField.addShip(typeShipUI, stateOrientation, colIndex, rowIndex);
+            cntMine--;
+            labelCntMine.setText(String.valueOf(cntMine));
+        } else if(btnMineSearcher.isSelected() && (cntMineSearcher > 0) && !(gameField.getStateCell(rowIndex, colIndex) == StateCell.BORDER)){
+            gameField.addShip(typeShipUI, stateOrientation, colIndex, rowIndex);
+            cntMineSearcher--;
+            labelCntMineSearcher.setText(String.valueOf(cntMineSearcher));
+        } else if(btnSubmarine.isSelected() && (cntSubmarine > 0) && !(gameField.getStateCell(rowIndex, colIndex) == StateCell.BORDER)){
+            if(!gameField.addShip(typeShipUI, stateOrientation, colIndex, rowIndex)){
+                return;
+            }
+            cntSubmarine--;
+            labelCntSubmarine.setText(String.valueOf(cntSubmarine));
+        }
+    }
+
+    private void deleteEvent(int rowIndex, int colIndex){
+        try {
+            switch (gameField.deleteShip(rowIndex, colIndex)){
+                case SHIP1 -> {cntShip1++;
+                    labelCntShip1.setText(String.valueOf(cntShip1));}
+                case SHIP2 -> {cntShip2++;
+                    labelCntShip2.setText(String.valueOf(cntShip2));}
+                case SHIP3 -> {cntShip3++;
+                    labelCntShip3.setText(String.valueOf(cntShip3));}
+                case SHIP4 -> {cntShip4++;
+                    labelCntShip4.setText(String.valueOf(cntShip4));}
+                case MINE -> {cntMine++;
+                    labelCntMine.setText(String.valueOf(cntMine));}
+                case MINE_SEARCHER -> {cntMineSearcher++;
+                    labelCntMineSearcher.setText(String.valueOf(cntMineSearcher));}
+                case SUBMARINE -> {cntSubmarine++;
+                    labelCntSubmarine.setText(String.valueOf(cntSubmarine));}
+            }
+        } catch (NullPointerException ignored){
+
+        }
+
+    }
+
     @FXML
     void initialize() {
         btnDelete.setToggleGroup(ActionsShip);
         btnAdd.setToggleGroup(ActionsShip);
-        btnRotate.setToggleGroup(ActionsShip);
         btnOrientX.setToggleGroup(orientation);
         btnOrientY.setToggleGroup(orientation);
         btnShip1.setToggleGroup(SelectShip);

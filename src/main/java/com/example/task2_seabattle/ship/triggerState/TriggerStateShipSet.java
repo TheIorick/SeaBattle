@@ -11,7 +11,7 @@ public class TriggerStateShipSet extends TriggerStateShip {
     }
 
     @Override
-    public boolean Ship(int n, int m) {
+    public boolean ship(int n, int m) {
         field.setStateCell(n, m, StateCell.HEALTHY);
         ship.getCellsShip().add(field.cells[n][m]);
         field.cells[n][m].elementInCell = ship;

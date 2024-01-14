@@ -12,7 +12,8 @@ import java.util.List;
 import java.util.Random;
 
 public class Ship {
-    private int x, y;
+    public int x, y;
+    public TypeShipUI typeShipUI;
 
     //направление, dy - по вертикали, dx - горизонталь
     private int dx, dy;
@@ -24,6 +25,7 @@ public class Ship {
         return dy;
     }
     private int healthPoints;
+    public boolean shipGhost = false;
 
     public void setHealthPoints(int healthPoints) {
         this.healthPoints = healthPoints;
@@ -62,6 +64,12 @@ public class Ship {
     }
 
     public Ship(Field field, int sizeShip) {
+        switch (sizeShip){
+            case 1 -> typeShipUI = TypeShipUI.SHIP1;
+            case 2 -> typeShipUI = TypeShipUI.SHIP2;
+            case 3 -> typeShipUI = TypeShipUI.SHIP3;
+            case 4 -> typeShipUI = TypeShipUI.SHIP4;
+        }
         this.sizeShip = sizeShip;
         this.healthPoints = sizeShip;
         this.field = field;
@@ -97,12 +105,14 @@ public class Ship {
         do {
             this.getPlace();
         } while (this.checkPlace());
+        this.typeShipUI = state;
         this.cellsShip = new ArrayList<>();
         this.cellsBorder = new ArrayList<>();
         this.setShip();
     }
 
     public Ship(Field field, TypeShipUI state, int sizeShip, int x, int y, boolean directionX) {
+        this.typeShipUI = state;
         switch (state){
             case SUBMARINE -> {
                 this.sizeShip = 3;
@@ -135,6 +145,10 @@ public class Ship {
             this.dx = 1;
         } else{
             this.dy = 1;
+        }
+        if (this.checkPlace()){
+            shipGhost = true;
+            return;
         }
         this.cellsShip = new ArrayList<>();
         this.cellsBorder = new ArrayList<>();
@@ -183,7 +197,7 @@ public class Ship {
         for (i = 0; i < sizeShip; i++) {
             m = y + i * dy;
             n = x + i * dx;
-            if (!ts.Ship(m, n)) {
+            if (!ts.ship(m, n)) {
                 return false;
             }
         }

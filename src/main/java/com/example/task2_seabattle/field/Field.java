@@ -39,7 +39,7 @@ public class Field {
      * Заполняем поле кораблями
      */
 
-    public void addShip(TypeShipUI typeShipUI, StateOrientation orientation, int x, int y){
+    public boolean addShip(TypeShipUI typeShipUI, StateOrientation orientation, int x, int y){
         boolean orient = switch (orientation) {
             case FOR_X -> true;
             case FOR_Y -> false;
@@ -52,8 +52,31 @@ public class Field {
             case MINE, SUBMARINE, MINE_SEARCHER -> 0;
         };
         Ship ship = new Ship(this, typeShipUI, sizeShip, x, y, orient);
+        if (ship.shipGhost){
+            return false;
+        }
         ships.add(ship);
         draw();
+        return true;
+    }
+
+    public TypeShipUI deleteShip(int x, int y){
+        for(Ship ship : ships){
+            if(ship.x == x && ship.y == y){
+                for (Cell cell : ship.getCellsShip()){
+                    cell.stateCell = StateCell.WATER;
+                }
+                for (Cell cell : ship.getCellsBorder()){
+                    cell.stateCell = StateCell.WATER;
+                }
+                TypeShipUI type = ship.typeShipUI;
+                ship = null;
+                System.out.println();
+                draw();
+                return type;
+            }
+        }
+        return null;
     }
     private void putShip() {
         ships = new ArrayList<Ship>();
