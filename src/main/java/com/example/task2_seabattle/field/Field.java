@@ -71,9 +71,7 @@ public class Field {
                     cell.stateCell = StateCell.WATER;
                 }
                 TypeShipUI type = ship.typeShipUI;
-                ship = null;
-                System.out.println();
-                draw();
+                ship.typeShipUI = null;
                 return type;
             }
         }
@@ -117,7 +115,7 @@ public class Field {
         }
     }
 
-    public void doShot(int x, int y){
+    public boolean doShot(int x, int y){
         boolean shot = false;
         StateCell stateCell = this.getStateCell(x, y);
         cells[x][y].shot = true;
@@ -146,23 +144,9 @@ public class Field {
                 this.setStateCell(x, y, StateCell.MISSED);
             }
         }
+        return shot;
     }
-    //Переименование границ потопленного корабля
-//    public boolean checkBorderCell(Ship ship){
-//        int n, m, i;
-//        for (i = -1; i < 2; i++) {
-//            m = y + i * dx - dy;
-//            n = x + i * dy - dx;
-//            if (stateCell == StateCell.BORDER) {
-//                return false;
-//            }
-//            m = y + i * dx + dy;
-//            n = x + i * dy + dx;
-//            if (!ts.border(m, n)) {
-//                return false;
-//            }
-//        }
-//    }
+
     public void draw() {
         for(int i=0; i<10; i++) {
             for(int j=0; j<10; j++) {

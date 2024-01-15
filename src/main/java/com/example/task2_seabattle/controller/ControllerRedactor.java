@@ -24,7 +24,8 @@ public class ControllerRedactor {
     static final int SIZE_FIELD = 10;
     static final int SIZE_CELL = 32;
     int cntShip1, cntShip2, cntShip3, cntShip4, cntMine, cntMineSearcher, cntSubmarine = 0;
-    Field gameField;
+    ControllerBattle controllerBattle;
+    static Field gameField;
     StateOrientation stateOrientation = StateOrientation.FOR_X;
     TypeShipUI typeShipUI = TypeShipUI.SHIP1;
 
@@ -114,12 +115,8 @@ public class ControllerRedactor {
     void clear() {
         gameField = new Field(true);
         mainGridPane.getChildren().clear(); // Очистить все дочерние элементы из mainGridPane
-        for (int row = 0; row < SIZE_FIELD; row++) {
-            for (int col = 0; col < SIZE_FIELD; col++) {
-                CellView cellView = new CellView(gameField.cells[row][col]);
-                mainGridPane.add(cellView, col, row);
-            }
-        }
+        updateView();
+
         cntShip1 = 4;
         cntShip2 = 3;
         cntShip3 = 2;
@@ -138,14 +135,9 @@ public class ControllerRedactor {
 
     @FXML
     void random() {
-        this.gameField = new Field();
+        gameField = new Field();
         mainGridPane.getChildren().clear(); // Очистить все дочерние элементы из mainGridPane
-        for (int row = 0; row < SIZE_FIELD; row++) {
-            for (int col = 0; col < SIZE_FIELD; col++) {
-                CellView cellView = new CellView(gameField.cells[row][col]);
-                mainGridPane.add(cellView, col, row);
-            }
-        }
+        updateView();
         cntShip1 = cntShip2 = cntShip3 = cntShip4 = cntMine = cntMineSearcher = cntSubmarine = 0;
         labelCntMine.setText("0");
         labelCntMineSearcher.setText("0");
@@ -204,7 +196,13 @@ public class ControllerRedactor {
         stage.show();
     }
     @FXML
-    void battle(ActionEvent event) {
+    void battle(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("battle.fxml"));
+        Scene mainScene = new Scene(fxmlLoader.load());
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setTitle("BebraSeaBattle");
+        stage.setScene(mainScene);
+        stage.show();
 
     }
 
@@ -223,12 +221,7 @@ public class ControllerRedactor {
             gameField.doShot(rowIndex, colIndex);
         }
         mainGridPane.getChildren().clear(); // Очистить все дочерние элементы из mainGridPane
-        for (int row = 0; row < SIZE_FIELD; row++) {
-            for (int col = 0; col < SIZE_FIELD; col++) {
-                CellView cellView = new CellView(gameField.cells[row][col]);
-                mainGridPane.add(cellView, col, row);
-            }
-        }
+        updateView();
     }
 
     private void addEvent(int rowIndex, int colIndex){
@@ -294,7 +287,14 @@ public class ControllerRedactor {
         }
 
     }
-
+    private void updateView(){
+        for (int row = 0; row < SIZE_FIELD; row++) {
+            for (int col = 0; col < SIZE_FIELD; col++) {
+                CellView cellView = new CellView(gameField.cells[row][col]);
+                mainGridPane.add(cellView, col, row);
+            }
+        }
+    }
     @FXML
     void initialize() {
         btnDelete.setToggleGroup(ActionsShip);
@@ -311,12 +311,7 @@ public class ControllerRedactor {
         btnSubmarine.setToggleGroup(SelectShip);
         gameField = new Field();
         mainGridPane.getChildren().clear(); // Очистить все дочерние элементы из mainGridPane
-        for (int row = 0; row < SIZE_FIELD; row++) {
-            for (int col = 0; col < SIZE_FIELD; col++) {
-                CellView cellView = new CellView(gameField.cells[row][col]);
-                mainGridPane.add(cellView, col, row);
-            }
-        }
+        updateView();
         assert btnRandom != null : "fx:id=\"btnRandom\" was not injected: check your FXML file 'sceneRedactor.fxml'.";
         assert mainGridPane != null : "fx:id=\"mainGridPane\" was not injected: check your FXML file 'sceneRedactor.fxml'.";
     }

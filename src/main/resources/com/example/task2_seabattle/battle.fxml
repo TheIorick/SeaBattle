@@ -187,7 +187,7 @@
       </Pane>
       <Pane layoutX="484.0" layoutY="94.0" prefHeight="355.0" prefWidth="355.0">
          <children>
-            <GridPane fx:id="robotGridPane" gridLinesVisible="true" layoutX="30.0" layoutY="30.0" onMouseClicked="#mouseRobotClickedEvent" prefHeight="325.0" prefWidth="325.0">
+            <GridPane fx:id="robotGridPane" layoutX="30.0" layoutY="30.0" onMouseClicked="#mouseRobotClickedEvent" prefHeight="325.0" prefWidth="325.0">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

@@ -44,10 +44,14 @@ public class CellView extends StackPane {
                     Circle submarine = new Circle(10, Color.YELLOW);
                     getChildren().add(submarine);
                 }
+                case SHOT -> {
+                    Circle hitMark = new Circle(10, Color.RED);
+                    getChildren().add(hitMark);
+                }
             }
         } else if (state == StateCell.SHOT || state == StateCell.KILLED) {
             // Отображение попадания
-            Circle hitMark = new Circle(10, Color.RED);
+            Circle hitMark = new Circle(10, Color.DARKRED);
             getChildren().add(hitMark);
         } else if (state == StateCell.MISSED) {
             Circle missed = new Circle(10, Color.WHITE);
@@ -64,7 +68,7 @@ public class CellView extends StackPane {
         getChildren().add(border);
         if (state == StateCell.SHOT || state == StateCell.KILLED) {
             // Отображение попадания
-            Circle hitMark = new Circle(10, Color.RED);
+            Circle hitMark = new Circle(10, Color.DARKRED);
             getChildren().add(hitMark);
         } else if (state == StateCell.MISSED) {
             Circle missed = new Circle(10, Color.WHITE);
