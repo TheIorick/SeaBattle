@@ -1,6 +1,6 @@
 package com.example.task2_seabattle.ship.triggerState;
 
-import com.example.task2_seabattle.field.StateCell;
+import com.example.task2_seabattle.enumsState.StateCell;
 import com.example.task2_seabattle.ship.Ship;
 
 public class TriggerStateShipSet extends TriggerStateShip {

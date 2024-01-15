@@ -1,5 +1,6 @@
 package com.example.task2_seabattle.field;
 
+import com.example.task2_seabattle.enumsState.StateCell;
 import com.example.task2_seabattle.ship.Ship;
 
 import java.util.Objects;

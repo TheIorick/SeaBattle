@@ -1,9 +1,8 @@
 package com.example.task2_seabattle.UI;
 
 import com.example.task2_seabattle.field.Cell;
-import com.example.task2_seabattle.field.StateCell;
-import com.example.task2_seabattle.ship.Ship;
-import com.example.task2_seabattle.ship.ShipState;
+import com.example.task2_seabattle.enumsState.StateCell;
+import com.example.task2_seabattle.enumsState.ShipState;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -46,10 +45,13 @@ public class CellView extends StackPane {
                     getChildren().add(submarine);
                 }
             }
-        } else if (state == StateCell.SHOT) {
+        } else if (state == StateCell.SHOT || state == StateCell.KILLED) {
             // Отображение попадания
-            Rectangle hitMark = new Rectangle(50, 50, Color.RED);
+            Circle hitMark = new Circle(10, Color.RED);
             getChildren().add(hitMark);
+        } else if (state == StateCell.MISSED) {
+            Circle missed = new Circle(10, Color.WHITE);
+            getChildren().add(missed);
         }
         // Другие случаи отображения состояний клеток
     }

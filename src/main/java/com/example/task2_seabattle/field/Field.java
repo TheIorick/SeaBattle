@@ -1,15 +1,16 @@
 package com.example.task2_seabattle.field;
 
-import com.example.task2_seabattle.UI.StateOrientation;
-import com.example.task2_seabattle.UI.TypeShipUI;
+import com.example.task2_seabattle.enumsState.StateOrientation;
+import com.example.task2_seabattle.enumsState.TypeShipUI;
+import com.example.task2_seabattle.enumsState.StateCell;
 import com.example.task2_seabattle.ship.Ship;
-import com.example.task2_seabattle.ship.ShipState;
+import com.example.task2_seabattle.enumsState.ShipState;
 
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.task2_seabattle.UI.TypeShipUI.*;
+import static com.example.task2_seabattle.enumsState.TypeShipUI.*;
 
 public class Field {
     final int SIZE_FIELD = 10;

@@ -1,4 +1,4 @@
-package com.example.task2_seabattle.field;
+package com.example.task2_seabattle.enumsState;
 
 import javafx.scene.Node;
 

@@ -1,6 +1,7 @@
 package com.example.task2_seabattle.ship;
 
-import com.example.task2_seabattle.UI.TypeShipUI;
+import com.example.task2_seabattle.enumsState.TypeShipUI;
+import com.example.task2_seabattle.enumsState.ShipState;
 import com.example.task2_seabattle.field.Cell;
 import com.example.task2_seabattle.field.Field;
 import com.example.task2_seabattle.ship.triggerState.TriggerStateShip;

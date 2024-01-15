@@ -1,4 +1,4 @@
-package com.example.task2_seabattle.ship;
+package com.example.task2_seabattle.enumsState;
 
 public enum ShipState {
     HEALTHY,

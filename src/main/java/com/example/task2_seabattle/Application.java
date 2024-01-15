@@ -14,23 +14,8 @@ public class Application extends javafx.application.Application {
         stage.setTitle("ЯСобакаТыСобакаЯСобакаТыСобакаЯСобакаТыСобакаЯСобакаТыСобакаЯСобакаТыСобакаЯСобака");
         stage.setScene(mainScene);
         stage.show();
-
-//        Field gameBoard = new Field();
-//        GameBoardView gameBoardView = new GameBoardView(gameBoard);
-//        Scene scene = new Scene(gameBoardView, 500, 500);
-//        stage.setScene(scene);
-//        stage.show();
     }
     public static void main(String[] args) {
         launch();
-
-//        field.draw();
-//        for (int i = 0; i < 10; i+= 2){
-//            for (int j = 0; j < 10; j += 2){
-//                field.doShot(i, j);
-//            }
-//        }
-//        System.out.println();
-//        field.draw();
     }
 }

@@ -4,11 +4,10 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import com.example.task2_seabattle.UI.CellView;
-import com.example.task2_seabattle.UI.StateAction;
-import com.example.task2_seabattle.UI.StateOrientation;
-import com.example.task2_seabattle.UI.TypeShipUI;
+import com.example.task2_seabattle.enumsState.StateOrientation;
+import com.example.task2_seabattle.enumsState.TypeShipUI;
 import com.example.task2_seabattle.field.Field;
-import com.example.task2_seabattle.field.StateCell;
+import com.example.task2_seabattle.enumsState.StateCell;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -21,7 +20,6 @@ public class Controller {
     int cntShip1, cntShip2, cntShip3, cntShip4, cntMine, cntMineSearcher, cntSubmarine = 0;
     Field gameField;
     StateOrientation stateOrientation = StateOrientation.FOR_X;
-    StateAction stateAction = StateAction.ADD;
     TypeShipUI typeShipUI = TypeShipUI.SHIP1;
 
     @FXML
@@ -44,6 +42,8 @@ public class Controller {
 
     @FXML
     private RadioButton btnDelete;
+    @FXML
+    private RadioButton btnShot;
 
     @FXML
     private RadioButton btnMine;
@@ -153,15 +153,6 @@ public class Controller {
         System.out.println(stateOrientation);
     }
     @FXML
-    void setAction(ActionEvent event) {
-        if (btnAdd.isSelected()){
-            stateAction = StateAction.ADD;
-        } else if (btnDelete.isSelected()) {
-            stateAction = StateAction.DELETE;
-        }
-        System.out.println(stateAction.toString());
-    }
-    @FXML
     void setShip(ActionEvent event) {
         if (btnShip1.isSelected()){
             typeShipUI = TypeShipUI.SHIP1;
@@ -202,6 +193,9 @@ public class Controller {
         }
         if (btnDelete.isSelected()){
             deleteEvent(colIndex, rowIndex);
+        }
+        if (btnShot.isSelected()){
+            gameField.doShot(rowIndex, colIndex);
         }
         mainGridPane.getChildren().clear(); // Очистить все дочерние элементы из mainGridPane
         for (int row = 0; row < SIZE_FIELD; row++) {
@@ -280,6 +274,7 @@ public class Controller {
     void initialize() {
         btnDelete.setToggleGroup(ActionsShip);
         btnAdd.setToggleGroup(ActionsShip);
+        btnShot.setToggleGroup(ActionsShip);
         btnOrientX.setToggleGroup(orientation);
         btnOrientY.setToggleGroup(orientation);
         btnShip1.setToggleGroup(SelectShip);

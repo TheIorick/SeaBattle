@@ -20,8 +20,8 @@
   <padding>
     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
   </padding>
-   <Pane />
-   <SplitPane dividerPositions="0.7292929292929293" prefHeight="489.0" prefWidth="567.0">
+   <Pane prefHeight="184.0" prefWidth="497.0" />
+   <SplitPane dividerPositions="0.7292929292929293" prefHeight="489.0" prefWidth="497.0">
      <items>
        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="359.0" prefWidth="394.0">
             <children>
@@ -177,18 +177,23 @@
          </AnchorPane>
        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="359.0" prefWidth="145.0">
             <children>
-               <VBox alignment="TOP_CENTER" layoutX="7.0" layoutY="81.0" prefHeight="72.0" prefWidth="117.0" spacing="5.0">
+               <VBox alignment="TOP_CENTER" layoutX="7.0" layoutY="74.0" prefHeight="72.0" prefWidth="117.0" spacing="5.0">
                   <children>
                      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="148.0" text="Actions with Ship" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
                         <font>
                            <Font name="Candara Light" size="16.0" />
                         </font>
                      </Label>
-                     <RadioButton fx:id="btnAdd" mnemonicParsing="false" onAction="#setAction" selected="true" text="Add Ship">
+                     <RadioButton fx:id="btnAdd" mnemonicParsing="false" selected="true" text="Add Ship">
                         <toggleGroup>
                            <ToggleGroup fx:id="ActionsShip" />
                         </toggleGroup></RadioButton>
-                     <RadioButton fx:id="btnDelete" mnemonicParsing="false" onAction="#setAction" text="Delete Ship" toggleGroup="$ActionsShip" />
+                     <RadioButton fx:id="btnDelete" mnemonicParsing="false" text="Delete Ship" toggleGroup="$ActionsShip" />
+                     <RadioButton fx:id="btnShot" mnemonicParsing="false" text="SHOT">
+                        <toggleGroup>
+                           <ToggleGroup fx:id="ActionsShip1" />
+                        </toggleGroup>
+                     </RadioButton>
                   </children>
                   <opaqueInsets>
                      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -254,10 +259,10 @@
          </AnchorPane>
      </items>
    </SplitPane>
-   <Pane prefHeight="200.0" prefWidth="200.0">
+   <Pane prefHeight="157.0" prefWidth="497.0">
       <children>
-         <Button layoutX="14.0" layoutY="26.0" mnemonicParsing="false" onAction="#clear" text="Clear" />
-         <Button fx:id="btnRandom" layoutX="83.0" layoutY="26.0" mnemonicParsing="false" onAction="#random" text="Random" />
+         <Button layoutX="15.0" mnemonicParsing="false" onAction="#clear" text="Clear" />
+         <Button fx:id="btnRandom" layoutX="85.0" mnemonicParsing="false" onAction="#random" text="Random" />
       </children>
    </Pane>
 </VBox>

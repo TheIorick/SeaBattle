@@ -1,4 +1,4 @@
-package com.example.task2_seabattle.UI;
+package com.example.task2_seabattle.enumsState;
 
 public enum StateOrientation {
     FOR_X,
