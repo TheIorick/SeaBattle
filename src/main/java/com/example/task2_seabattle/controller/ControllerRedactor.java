@@ -1,8 +1,10 @@
-package com.example.task2_seabattle;
+package com.example.task2_seabattle.controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.example.task2_seabattle.Application;
 import com.example.task2_seabattle.UI.CellView;
 import com.example.task2_seabattle.enumsState.StateOrientation;
 import com.example.task2_seabattle.enumsState.TypeShipUI;
@@ -10,11 +12,15 @@ import com.example.task2_seabattle.field.Field;
 import com.example.task2_seabattle.enumsState.StateCell;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 
-public class Controller {
+public class ControllerRedactor {
     static final int SIZE_FIELD = 10;
     static final int SIZE_CELL = 32;
     int cntShip1, cntShip2, cntShip3, cntShip4, cntMine, cntMineSearcher, cntSubmarine = 0;
@@ -27,6 +33,12 @@ public class Controller {
 
     @FXML
     private URL location;
+
+    @FXML
+    private Button btnBattle;
+
+    @FXML
+    private Button btnReturn;
 
     @FXML
     private ToggleGroup ActionsShip;
@@ -182,6 +194,19 @@ public class Controller {
             }
         } return false;
     }
+    @FXML
+    void returnMainMenu(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("mainMenu.fxml"));
+        Scene mainScene = new Scene(fxmlLoader.load());
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setTitle("BebraSeaBattleMainMenu");
+        stage.setScene(mainScene);
+        stage.show();
+    }
+    @FXML
+    void battle(ActionEvent event) {
+
+    }
 
     @FXML
     void mouseClickedEvent(MouseEvent event) {
@@ -292,7 +317,7 @@ public class Controller {
                 mainGridPane.add(cellView, col, row);
             }
         }
-        assert btnRandom != null : "fx:id=\"btnRandom\" was not injected: check your FXML file 'hello-view.fxml'.";
-        assert mainGridPane != null : "fx:id=\"mainGridPane\" was not injected: check your FXML file 'hello-view.fxml'.";
+        assert btnRandom != null : "fx:id=\"btnRandom\" was not injected: check your FXML file 'sceneRedactor.fxml'.";
+        assert mainGridPane != null : "fx:id=\"mainGridPane\" was not injected: check your FXML file 'sceneRedactor.fxml'.";
     }
 }

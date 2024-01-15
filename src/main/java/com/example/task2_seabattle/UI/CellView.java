@@ -53,6 +53,22 @@ public class CellView extends StackPane {
             Circle missed = new Circle(10, Color.WHITE);
             getChildren().add(missed);
         }
-        // Другие случаи отображения состояний клеток
+    }
+
+    public CellView(Cell cell, boolean shot){
+        setPrefSize(30, 30); // Установка размера клетки
+        StateCell state = cell.stateCell;
+        Rectangle border = new Rectangle(30, 30);
+        border.setFill(Color.LIGHTBLUE);
+        border.setStroke(Color.BLACK);
+        getChildren().add(border);
+        if (state == StateCell.SHOT || state == StateCell.KILLED) {
+            // Отображение попадания
+            Circle hitMark = new Circle(10, Color.RED);
+            getChildren().add(hitMark);
+        } else if (state == StateCell.MISSED) {
+            Circle missed = new Circle(10, Color.WHITE);
+            getChildren().add(missed);
+        }
     }
 }

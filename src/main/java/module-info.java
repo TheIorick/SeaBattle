@@ -5,4 +5,6 @@ module com.example.task2_seabattle {
 
     opens com.example.task2_seabattle to javafx.fxml;
     exports com.example.task2_seabattle;
+    exports com.example.task2_seabattle.controller;
+    opens com.example.task2_seabattle.controller to javafx.fxml;
 }
