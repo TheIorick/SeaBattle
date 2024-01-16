@@ -28,7 +28,7 @@ public class CellView extends StackPane {
         if (state == StateCell.HEALTHY) {
             ShipState shipState = cell.elementInCell.getShipHealthState();
             switch (shipState){
-                case HEALTHY -> {
+                case HEALTHY, SHOT -> {
                     Circle ship = new Circle(10, Color.DARKSLATEGRAY);
                     getChildren().add(ship);
                 }
@@ -37,16 +37,12 @@ public class CellView extends StackPane {
                     getChildren().add(mineSearcher);
                 }
                 case MINE -> {
-                    Circle mine = new Circle(10, Color.DARKRED);
+                    Circle mine = new Circle(10, Color.ORANGE);
                     getChildren().add(mine);
                 }
                 case SUBMARINE -> {
                     Circle submarine = new Circle(10, Color.YELLOW);
                     getChildren().add(submarine);
-                }
-                case SHOT -> {
-                    Circle hitMark = new Circle(10, Color.RED);
-                    getChildren().add(hitMark);
                 }
             }
         } else if (state == StateCell.SHOT || state == StateCell.KILLED) {
@@ -59,7 +55,7 @@ public class CellView extends StackPane {
         }
     }
 
-    public CellView(Cell cell, boolean shot){
+    public CellView(Cell cell, boolean mineSearcher){
         setPrefSize(30, 30); // Установка размера клетки
         StateCell state = cell.stateCell;
         Rectangle border = new Rectangle(30, 30);

@@ -132,6 +132,7 @@ public class Field {
                     }
                     for (Cell cell : ship.getCellsBorder()){
                         cell.stateCell = StateCell.MISSED;
+                        cell.shot = true;
                     }
                 } else {
                     ship.setShipHealthState(ShipState.SHOT);

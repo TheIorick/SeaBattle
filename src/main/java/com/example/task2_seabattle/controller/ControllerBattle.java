@@ -1,11 +1,15 @@
 package com.example.task2_seabattle.controller;
 
 import java.net.URL;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 import com.example.task2_seabattle.Robot;
 import com.example.task2_seabattle.UI.CellView;
+import com.example.task2_seabattle.enumsState.ShipState;
+import com.example.task2_seabattle.enumsState.TypeShipUI;
 import com.example.task2_seabattle.field.Field;
+import com.example.task2_seabattle.ship.Ship;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
@@ -20,6 +24,7 @@ public class ControllerBattle {
     private Field playerField;
 
     Field robotField;
+    Random random = new Random();
 
     @FXML
     private ResourceBundle resources;
@@ -58,10 +63,42 @@ public class ControllerBattle {
     void mouseRobotClickedEvent(MouseEvent event) {
         int colIndex = (int) (event.getX() / SIZE_CELL); // Определяем индекс столбца
         int rowIndex = (int) (event.getY() / SIZE_CELL); // Определяем индекс строки
-        robotField.doShot(rowIndex, colIndex);
-        robotGridPane.getChildren().clear(); // Очистить все дочерние элементы из mainGridPane
-        updateView();
-        robot.move();
+        if (robotField.doShot(rowIndex, colIndex)) {
+            robotGridPane.getChildren().clear(); // Очистить все дочерние элементы из mainGridPane
+
+            try {
+                if (robotField.cells[rowIndex][colIndex].elementInCell.typeShipUI == TypeShipUI.MINE) {
+                    for(Ship randomShip : playerField.ships){
+                        if(randomShip.typeShipUI == TypeShipUI.MINE || randomShip.typeShipUI == TypeShipUI.MINE_SEARCHER || randomShip.typeShipUI == TypeShipUI.SUBMARINE){
+                            continue;
+                        }
+                        playerField.doShot(randomShip.y, randomShip.x);
+                        while (robot.move()) {
+
+                        }
+                        break;
+                    }
+                }
+            } catch (NullPointerException ignored){
+
+            } try {
+                if (robotField.cells[rowIndex][colIndex].elementInCell.typeShipUI == TypeShipUI.MINE_SEARCHER){
+                    for(Ship mine : robotField.ships){
+                        if (mine.typeShipUI == TypeShipUI.MINE){
+                            mine.typeShipUI = TypeShipUI.SHIP1;
+                            robotField.doShot(mine.y, mine.x);
+                        }
+                    }
+                }
+            } catch (NullPointerException ignored){
+
+            }
+            updateView();
+            return;
+        }
+        while (robot.move()){
+
+        };
         updateView();
     }
 

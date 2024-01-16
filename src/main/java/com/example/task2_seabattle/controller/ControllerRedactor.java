@@ -2,14 +2,18 @@ package com.example.task2_seabattle.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 import com.example.task2_seabattle.Application;
+import com.example.task2_seabattle.Robot;
 import com.example.task2_seabattle.UI.CellView;
+import com.example.task2_seabattle.enumsState.ShipState;
 import com.example.task2_seabattle.enumsState.StateOrientation;
 import com.example.task2_seabattle.enumsState.TypeShipUI;
 import com.example.task2_seabattle.field.Field;
 import com.example.task2_seabattle.enumsState.StateCell;
+import com.example.task2_seabattle.ship.Ship;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,6 +32,8 @@ public class ControllerRedactor {
     static Field gameField;
     StateOrientation stateOrientation = StateOrientation.FOR_X;
     TypeShipUI typeShipUI = TypeShipUI.SHIP1;
+    Random random = new Random();
+    Robot robot;
 
     @FXML
     private ResourceBundle resources;
@@ -208,6 +214,7 @@ public class ControllerRedactor {
 
     @FXML
     void mouseClickedEvent(MouseEvent event) {
+        robot = new Robot(gameField);
         int colIndex = (int) (event.getX() / SIZE_CELL); // Определяем индекс столбца
         int rowIndex = (int) (event.getY() / SIZE_CELL); // Определяем индекс строки
         if (btnAdd.isSelected()){
