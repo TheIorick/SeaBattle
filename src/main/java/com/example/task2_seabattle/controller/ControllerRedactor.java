@@ -8,12 +8,10 @@ import java.util.ResourceBundle;
 import com.example.task2_seabattle.Application;
 import com.example.task2_seabattle.Robot;
 import com.example.task2_seabattle.UI.CellView;
-import com.example.task2_seabattle.enumsState.ShipState;
 import com.example.task2_seabattle.enumsState.StateOrientation;
 import com.example.task2_seabattle.enumsState.TypeShipUI;
 import com.example.task2_seabattle.field.Field;
 import com.example.task2_seabattle.enumsState.StateCell;
-import com.example.task2_seabattle.ship.Ship;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -122,12 +120,11 @@ public class ControllerRedactor {
         gameField = new Field(true);
         mainGridPane.getChildren().clear(); // Очистить все дочерние элементы из mainGridPane
         updateView();
-
-        cntShip1 = 4;
+        cntShip1 = 40;
         cntShip2 = 3;
         cntShip3 = 2;
         cntShip4 = 1;
-        cntMine = 1;
+        cntMine = 10;
         cntMineSearcher = 1;
         cntSubmarine = 1;
         labelCntMine.setText(String.valueOf(cntMine));
@@ -160,7 +157,6 @@ public class ControllerRedactor {
         } else{
             stateOrientation = StateOrientation.FOR_Y;
         }
-        System.out.println(stateOrientation);
     }
     @FXML
     void setShip(ActionEvent event) {
@@ -179,7 +175,6 @@ public class ControllerRedactor {
         } else if (btnSubmarine.isSelected()){
             typeShipUI = TypeShipUI.SUBMARINE;
         }
-        System.out.println(typeShipUI.toString());
     }
 
     private boolean borderCheck(int size, int x, int y, StateOrientation orient){
@@ -226,6 +221,8 @@ public class ControllerRedactor {
         }
         if (btnShot.isSelected()){
             gameField.doShot(rowIndex, colIndex);
+            gameField.shotMinePlayer(gameField, robot, rowIndex, colIndex);
+            gameField.shotMineSearcher(rowIndex, colIndex);
         }
         mainGridPane.getChildren().clear(); // Очистить все дочерние элементы из mainGridPane
         updateView();

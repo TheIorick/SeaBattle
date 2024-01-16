@@ -1,5 +1,6 @@
 package com.example.task2_seabattle.field;
 
+import com.example.task2_seabattle.Robot;
 import com.example.task2_seabattle.enumsState.StateOrientation;
 import com.example.task2_seabattle.enumsState.TypeShipUI;
 import com.example.task2_seabattle.enumsState.StateCell;
@@ -50,17 +51,61 @@ public class Field {
             case SHIP2 -> sizeShip = 2;
             case SHIP3 -> sizeShip = 3;
             case SHIP4 -> sizeShip = 4;
-            case MINE, SUBMARINE, MINE_SEARCHER -> 0;
+            case MINE, SUBMARINE, MINE_SEARCHER, WATER -> 0;
         };
         Ship ship = new Ship(this, typeShipUI, sizeShip, x, y, orient);
         if (ship.shipGhost){
             return false;
         }
         ships.add(ship);
-        draw();
         return true;
     }
 
+    //метод который реализует логику мины
+    public void shotMinePlayer(Field bombedField, Robot robot, int rowIndex, int colIndex){
+        try {
+            if (this.cells[rowIndex][colIndex].elementInCell.typeShipUI == TypeShipUI.MINE) {
+                for(Ship randomShip : bombedField.ships){
+                    if (isExcludedShipType(randomShip.typeShipUI) || bombedField.cells[randomShip.y][randomShip.x].shot) {
+                        continue;
+                    }
+                    bombedField.doShot(randomShip.y, randomShip.x);
+                    while (robot.move()) {
+
+                    }
+                    break;
+                }
+            }
+        } catch (NullPointerException ignored){
+        }
+    }
+    private boolean isExcludedShipType(TypeShipUI shipType) {
+        return shipType == TypeShipUI.MINE || shipType == TypeShipUI.MINE_SEARCHER || shipType == TypeShipUI.SUBMARINE;
+    }
+    public void shotMineRobot(Field bombedField){
+        for(Ship randomShip : bombedField.ships){
+            if (isExcludedShipType(randomShip.typeShipUI) || bombedField.cells[randomShip.y][randomShip.x].shot) {
+                continue;
+            }
+            bombedField.doShot(randomShip.y, randomShip.x);
+            break;
+        }
+    }
+
+    public void shotMineSearcher(int rowIndex, int colIndex){
+        try {
+            if (this.cells[rowIndex][colIndex].elementInCell.typeShipUI == TypeShipUI.MINE_SEARCHER){
+                for(Ship mine : this.ships){
+                    if (mine.typeShipUI == TypeShipUI.MINE){
+                        mine.typeShipUI = TypeShipUI.SHIP1;
+                        this.doShot(mine.y, mine.x);
+                    }
+                }
+            }
+        } catch (NullPointerException ignored){
+
+        }
+    }
     public TypeShipUI deleteShip(int x, int y){
         for(Ship ship : ships){
             if(ship.x == x && ship.y == y){
@@ -77,6 +122,8 @@ public class Field {
         }
         return null;
     }
+
+    //рандомное выставление кораблей и прочего
     private void putShip() {
         ships = new ArrayList<Ship>();
         for(int i = 4; i > 0; i--){
@@ -104,6 +151,14 @@ public class Field {
             return cells[x][y].stateCell;
         } else {
             return StateCell.EMPTY;
+        }
+    }
+
+    public TypeShipUI getTypeShipCell(int y, int x){
+        if (this.cells[y][x].elementInCell != null){
+            return cells[y][x].elementInCell.typeShipUI;
+        } else {
+            return null;
         }
     }
     /**

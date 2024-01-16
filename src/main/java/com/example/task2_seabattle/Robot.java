@@ -10,7 +10,7 @@ import java.util.Random;
 public class Robot {
     private static final int SIZE_FIELD = 10;
     public Field field;
-    private int x, y;
+    public int x, y;
     Random random;
 
     public Robot(Field field) {

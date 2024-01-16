@@ -7,5 +7,6 @@ public enum TypeShipUI {
     SHIP4,
     MINE,
     MINE_SEARCHER,
-    SUBMARINE
+    SUBMARINE,
+    WATER
 }

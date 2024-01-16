@@ -6,10 +6,8 @@ import java.util.ResourceBundle;
 
 import com.example.task2_seabattle.Robot;
 import com.example.task2_seabattle.UI.CellView;
-import com.example.task2_seabattle.enumsState.ShipState;
 import com.example.task2_seabattle.enumsState.TypeShipUI;
 import com.example.task2_seabattle.field.Field;
-import com.example.task2_seabattle.ship.Ship;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
@@ -65,34 +63,8 @@ public class ControllerBattle {
         int rowIndex = (int) (event.getY() / SIZE_CELL); // Определяем индекс строки
         if (robotField.doShot(rowIndex, colIndex)) {
             robotGridPane.getChildren().clear(); // Очистить все дочерние элементы из mainGridPane
-
-            try {
-                if (robotField.cells[rowIndex][colIndex].elementInCell.typeShipUI == TypeShipUI.MINE) {
-                    for(Ship randomShip : playerField.ships){
-                        if(randomShip.typeShipUI == TypeShipUI.MINE || randomShip.typeShipUI == TypeShipUI.MINE_SEARCHER || randomShip.typeShipUI == TypeShipUI.SUBMARINE){
-                            continue;
-                        }
-                        playerField.doShot(randomShip.y, randomShip.x);
-                        while (robot.move()) {
-
-                        }
-                        break;
-                    }
-                }
-            } catch (NullPointerException ignored){
-
-            } try {
-                if (robotField.cells[rowIndex][colIndex].elementInCell.typeShipUI == TypeShipUI.MINE_SEARCHER){
-                    for(Ship mine : robotField.ships){
-                        if (mine.typeShipUI == TypeShipUI.MINE){
-                            mine.typeShipUI = TypeShipUI.SHIP1;
-                            robotField.doShot(mine.y, mine.x);
-                        }
-                    }
-                }
-            } catch (NullPointerException ignored){
-
-            }
+            robotField.shotMinePlayer(playerField, robot, rowIndex, colIndex);
+            robotField.shotMineSearcher(rowIndex, colIndex);
             updateView();
             return;
         }

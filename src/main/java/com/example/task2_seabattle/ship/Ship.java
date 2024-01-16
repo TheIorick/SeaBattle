@@ -15,6 +15,7 @@ import java.util.Random;
 public class Ship {
     public int x, y;
     public TypeShipUI typeShipUI;
+    public boolean shot;
 
     //направление, dy - по вертикали, dx - горизонталь
     private int dx, dy;
@@ -26,6 +27,7 @@ public class Ship {
         return dy;
     }
     private int healthPoints;
+    //переменная которая нужна для отслеживания проверки расположения корабля на карте
     public boolean shipGhost = false;
 
     public void setHealthPoints(int healthPoints) {
