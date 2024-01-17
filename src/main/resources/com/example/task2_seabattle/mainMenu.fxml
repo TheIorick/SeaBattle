@@ -18,6 +18,6 @@
             <Font name="Comic Sans MS Italic" size="13.0" />
          </font>
       </Label>
-      <Button layoutX="135.0" layoutY="307.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="267.0" text="2 PLAYERS" />
+      <Button disable="true" layoutX="135.0" layoutY="307.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="267.0" text="2 PLAYERS" />
    </children>
 </Pane>
