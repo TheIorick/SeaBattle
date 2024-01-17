@@ -127,6 +127,7 @@ public class ControllerBattle {
             }
             updateView();
         };
+        updateView();
     }
 
     private void updateView(){
