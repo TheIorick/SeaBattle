@@ -82,13 +82,18 @@ public class Field {
     private boolean isExcludedShipType(TypeShipUI shipType) {
         return shipType == TypeShipUI.MINE || shipType == TypeShipUI.MINE_SEARCHER || shipType == TypeShipUI.SUBMARINE;
     }
-    public void shotMineRobot(Field bombedField){
-        for(Ship randomShip : bombedField.ships){
-            if (isExcludedShipType(randomShip.typeShipUI) || bombedField.cells[randomShip.y][randomShip.x].shot) {
-                continue;
+    public void shotMineRobot(Field bombedField, int rowIndex, int colIndex){
+        try {
+            if (this.cells[rowIndex][colIndex].elementInCell.typeShipUI == TypeShipUI.MINE) {
+                for(Ship randomShip : bombedField.ships){
+                    if (isExcludedShipType(randomShip.typeShipUI) || bombedField.cells[randomShip.y][randomShip.x].shot) {
+                        continue;
+                    }
+                    bombedField.doShot(randomShip.y, randomShip.x);
+                    break;
+                }
             }
-            bombedField.doShot(randomShip.y, randomShip.x);
-            break;
+        } catch (NullPointerException ignored){
         }
     }
 
@@ -111,6 +116,7 @@ public class Field {
             if(ship.x == x && ship.y == y){
                 for (Cell cell : ship.getCellsShip()){
                     cell.stateCell = StateCell.WATER;
+                    cell.elementInCell = null;
                 }
                 for (Cell cell : ship.getCellsBorder()){
                     cell.stateCell = StateCell.WATER;

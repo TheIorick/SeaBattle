@@ -120,11 +120,11 @@ public class ControllerRedactor {
         gameField = new Field(true);
         mainGridPane.getChildren().clear(); // Очистить все дочерние элементы из mainGridPane
         updateView();
-        cntShip1 = 40;
+        cntShip1 = 4;
         cntShip2 = 3;
         cntShip3 = 2;
         cntShip4 = 1;
-        cntMine = 10;
+        cntMine = 1;
         cntMineSearcher = 1;
         cntSubmarine = 1;
         labelCntMine.setText(String.valueOf(cntMine));

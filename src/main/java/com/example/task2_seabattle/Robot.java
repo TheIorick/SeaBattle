@@ -10,7 +10,24 @@ import java.util.Random;
 public class Robot {
     private static final int SIZE_FIELD = 10;
     public Field field;
-    public int x, y;
+    private int x, y;
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
     Random random;
 
     public Robot(Field field) {
@@ -28,6 +45,8 @@ public class Robot {
             }
         }
         Cell cell = list.get(random.nextInt(list.size()));
+        x = cell.x;
+        y = cell.y;
         return field.doShot(cell.x, cell.y);
     }
     public boolean move() {
@@ -56,6 +75,7 @@ public class Robot {
                     continue;
                 }
                 if (!field.cells[a][b].shot) {
+                    y = b;
                     list.add(field.cells[a][b]);
                 }
             }
@@ -66,6 +86,7 @@ public class Robot {
                     continue;
                 }
                 if (!field.cells[a][b].shot) {
+                    x = a;
                     list.add(field.cells[a][b]);
                 }
             }
